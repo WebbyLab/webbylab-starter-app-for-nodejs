@@ -1,0 +1,43 @@
+image: node:10.7
+
+services:
+  - mysql:5.7
+
+variables:
+  MYSQL_DATABASE: test_db
+  TEST_DB_HOST: mysql
+  MYSQL_ROOT_PASSWORD: mysql
+
+lint:
+  stage: test
+  script:
+    - npm install
+    - cp etc/config.json.sample etc/config.json
+    - cp etc/db.json.sample etc/db.json
+    - npm run test:lint
+
+test-security:
+  stage: test
+  script:
+    - npm install
+    - cp etc/config.json.sample etc/config.json
+    - cp etc/db.json.sample etc/db.json
+    - npm run test:audit
+
+test-mocha:
+  stage: test
+  script:
+    - npm install
+    - cp etc/config.json.sample etc/config.json
+    - cp etc/db.json.sample etc/db.json
+    - npm run migration-test
+    - npm run test:mocha
+
+test-coverage:
+  stage: test
+  script:
+    - npm install
+    - cp etc/config.json.sample etc/config.json
+    - cp etc/db.json.sample etc/db.json
+    - npm run migration-test
+    - npm run test:coverage

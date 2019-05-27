@@ -1,0 +1,6 @@
+node_modules/
+npm-debug.log
+etc/config.json
+etc/db.json
+coverage/
+logs/*
