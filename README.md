@@ -1,13 +1,11 @@
 ## RUN DEVELOPMENT VERSION
-1. apt-get install mysql-server // (5.7.8 version)
-2. run mysql-server: ```service mysql start```
-3. create mysql schema // new db
-4. cp etc/config.json.sample etc/config.json // You can use your gmail acc for testing email sending but you'll neeed to set real email and password in config
-5. cp etc/db.json.sample etc/db.json // Set correct database options
-6. npm install
-7. npm run migration:dev
-8. npm run nodemon
+1. npm install
+2. npm run migration:dev
+3. npm run nodemon
 
+## RUN IN CONTAINER (DOCKER)
+1. make sure docker and docker-compose are installed 
+2. run docker-compose up
 
 ## RUN PRODUCTION VERSION
 1. apt-get install mysql-server // (5.7.8 version)
@@ -17,7 +15,7 @@
 5. cp etc/db.json.sample etc/db.json // Set correct database options
 6. npm install
 7. npm run migration
-8. nmp start
+8. npm start
 
 
 

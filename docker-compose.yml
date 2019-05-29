@@ -1,0 +1,10 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server:latest
+  backend:
+    container_name: backend
+    build: .
+    depends_on: 
+     - mysql
