@@ -14,7 +14,7 @@ module.exports = {
             lang           : { type: Sequelize.STRING, defaultValue: config.defaultLang },
             agreeWithTerms : { type: Sequelize.BOOLEAN, allowNull: false },
             passwordHash   : { type: Sequelize.STRING },
-            updatedBy      : { type: Sequelize.UUID, allowNull: false },
+            // updatedBy      : { type: Sequelize.UUID, allowNull: false },
             createdAt      : { type: Sequelize.DATE, allowNull: false },
             updatedAt      : { type: Sequelize.DATE, allowNull: false }
         });
