@@ -87,6 +87,7 @@
     "eslint-plugin-more": "0.3.2",
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
+    "eslint-plugin-react": "^7.18.3",
     "isomorphic-fetch": "^2.2.1",
     "istanbul": "^1.1.0-alpha.1",
     "mocha": "^7.1.0",
