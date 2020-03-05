@@ -65,6 +65,7 @@
     "uuid-validate": "0.0.3"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
