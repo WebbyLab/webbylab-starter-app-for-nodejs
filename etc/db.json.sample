@@ -2,35 +2,35 @@
     "development": {
         "username": "docker",
         "password": "docker",
-        "database": "amg",
+        "database": "starterkit2",
         "dialect": "postgres",
         "host": "localhost"
     },
     "qa": {
       "username": "docker",
       "password": "docker",
-      "database": "amg",
+      "database": "starterkit",
       "dialect": "postgres",
       "host": "localhost"
     },
     "uat": {
       "username": "docker",
       "password": "docker",
-      "database": "amg",
+      "database": "starterkit",
       "dialect": "postgres",
       "host": "localhost"
     },
     "production": {
       "username": "docker",
       "password": "docker",
-      "database": "amg",
+      "database": "starterkit",
       "dialect": "postgres",
       "host": "localhost"
     },
     "test": {
       "username": "docker",
       "password": "docker",
-      "database": "amg",
+      "database": "starterkit",
       "dialect": "postgres",
       "host": "localhost"
     }

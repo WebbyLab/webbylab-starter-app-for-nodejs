@@ -3,9 +3,10 @@
 import express     from 'express';
 import middlewares from './lib/middlewares.js';
 import router      from './lib/router.js';
-import { appPort } from './etc/config.js';
+import config      from './etc/config.js';
 import './lib/registerValidationRules.js';
 
+const { appPort } = config;
 
 // Init app
 const app = express();
