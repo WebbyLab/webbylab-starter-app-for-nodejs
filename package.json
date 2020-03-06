@@ -32,7 +32,6 @@
   "dependencies": {
     "ava": "^3.5.0",
     "aws-serverless-express": "^3.3.5",
-    "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
     "body-parser": "^1.18.3",
     "bunyan-singletone-facade": "github:WebbyLab/bunyan-singletone-facade",
