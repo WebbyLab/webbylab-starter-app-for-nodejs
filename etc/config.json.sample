@@ -1,16 +1,16 @@
 {
     "mainUrl": "{{MAIN_URL}}",
     "staticUrl": "{{STATIC_URL}}",
+    "secret":  "{{SECRET}}",
+    "appPort": "{{PORT}}",
+    "testStaticPath": "{{TEST_STATIC_PATH}}",
+    "postImagesMaxSize": "{{POST_IMAGES_MAX_SIZE}}",
+    "imagesPath"       : "{{IMAGES_PATH}}",
     "s3": {
         "accessKeyId": "{{S3_ACCESS_KEY_ID}}",
         "secretAccessKey": "{{S3_SECRET_ACCESS_KEY}}",
         "bucket": "{{S3_BUCKET}}"
     },
-    "secret":  "{{SECRET}}",
-    "appPort": "{{PORT}}",
-    "testStaticPath": "./test_static",
-    "postImagesMaxSize": 4000000,
-    "imagesPath"       : "images/",
     "mail": {
         "from": "{{MAIL_FROM}}",
         "transport": "{{MAIL_TRANSPORT}}",
@@ -20,7 +20,7 @@
             "auth": {
                 "user": "{{MAIL_AUTH_USER}}",
                 "pass": "{{MAIL_AUTH_PASS}}",
-                "region": "us-east-1"
+                "region": "{{MAIL_AUTH_REGION}}"
             }
         }
     }
