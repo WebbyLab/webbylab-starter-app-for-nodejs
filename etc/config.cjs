@@ -1,7 +1,9 @@
 /* eslint-disable import/no-commonjs */
-const confme = require('confme');
-
-const config = confme(`${__dirname}/db.json`);
 
 // is needed for sequelize-cli migrations/seeds
+
+const confme = require('confme');
+
+const config = confme(`${__dirname}/config.json`);
+
 module.exports = config;

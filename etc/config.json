@@ -23,5 +23,21 @@
                 "region": "{{MAIL_AUTH_REGION}}"
             }
         }
+    },
+    "db" : {
+        "username": "{{DB_USERNAME}}",
+        "password": "{{DB_PASSWORD}}",
+        "database": "{{DB_DATABASE}}",
+        "dialect": "{{DB_DIALECT}}",
+        "host": "{{DB_HOST}}",
+        "port": "{{DB_PORT}}"
+    },
+    "test-db": {
+        "username": "{{TEST_DB_USERNAME}}",
+        "password": "{{TEST_DB_PASSWORD}}",
+        "database": "{{TEST_DB_DATABASE}}",
+        "dialect": "{{TEST_DB_DIALECT}}",
+        "host": "{{TEST_DB_HOST}}",
+        "port": "{{TEST_DB_PORT}}"
     }
 }

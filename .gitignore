@@ -2,5 +2,4 @@ node_modules/
 npm-debug.log
 coverage/
 logs/*
-etc/config.json
-etc/db.json
+.env

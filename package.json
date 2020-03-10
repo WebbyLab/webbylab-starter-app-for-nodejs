@@ -20,8 +20,8 @@
     "coverage": "cross-env MODE=test node -r node_modules/istanbul/lib/cli.js cover $npm_package_config_ISPARTA_OPTS node_modules/.bin/_mocha -- $npm_package_config_MOCHA_OPTS",
     "coverage-check": "cross-env MODE=test node_modules/istanbul/lib/cli.js check-coverage $npm_package_config_COVERAGE_OPTS",
     "create-user": "node ./bin/add_user.js",
-    "migration:test": "sequelize db:migrate --config etc/db.cjs --env test",
-    "migration:dev": "sequelize db:migrate --config etc/db.cjs --env development",
+    "migration:test": "sequelize db:migrate --config etc/config.cjs --env test-db",
+    "migration:db": "sequelize db:migrate --config etc/config.cjs --env db",
     "create-lambda-proxy ": "claudia generate-serverless-express-proxy --express-module runner",
     "create-lambda": "claudia create --handler lambda.handler --deploy-proxy-api --region eu-central-1 --role modern-node-be-executor --aws-client-timeout 1200000 --set-env-from-json lambda.env.json",
     "update-lambda": "claudia update --handler lambda.handler --deploy-proxy-api --region eu-central-1 --role modern-node-be-executor --aws-client-timeout 1200000 --set-env-from-json lambda.env.json"
