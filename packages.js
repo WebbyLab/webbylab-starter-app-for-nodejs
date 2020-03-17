@@ -6,5 +6,6 @@ import _bluebird    from 'bluebird';
 export const ServiceBase  = _ServiceBase.default;
 export const Exception    = _Exception.default;
 export const DataTypes    = _Sequelize.DataTypes;
+export const Op           = _Sequelize.Op;
 export const promisifyAll = _bluebird.promisifyAll;
 export const promisify    = _bluebird.promisify;
