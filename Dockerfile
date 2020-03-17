@@ -1,4 +1,4 @@
-FROM node:13 as BUILDER
+FROM node:13-alpine as BUILDER
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY . /app
 # COPY . .
 # RUN npm install
 
-FROM node:13
+FROM node:13-alpine
 WORKDIR /app
 COPY --from=BUILDER /app .
 
