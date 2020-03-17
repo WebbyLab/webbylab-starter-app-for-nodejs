@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  backend:
+    build: ./
+    command: npm run nodemon
+    ports:
+        - 8080:8080
+    env_file:
+        - .env
+    environment:
+      MODE: development
+      PORT: 8080
+      TEST_DB_HOST: test-db
+      TEST_DB_PORT: 3306
+    depends_on:
+      - test-db
+    volumes:
+        - .:/app

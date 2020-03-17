@@ -18,6 +18,7 @@ app.use(middlewares.multipart);
 app.use(middlewares.include);
 app.use('/api/v1', router);
 
+console.log(`[App] INIT MODE: ${process.env.MODE}`);
 
 /* istanbul ignore else  */
 if (!process.env.LAMBDA && process.env.MODE !== 'test') {
