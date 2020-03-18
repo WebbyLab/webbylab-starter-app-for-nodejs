@@ -22,7 +22,7 @@ app.use(middlewares.multipart);
 app.use(middlewares.include);
 app.use('/api/v1', router);
 
-const dbMode = process.env.MODE === 'production' ? 'db' : 'test-db';
+const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
 
 const { sequelize } = initModels(config[dbMode]);
 

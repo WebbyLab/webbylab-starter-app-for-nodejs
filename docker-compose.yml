@@ -1,18 +1,18 @@
 version: '3.7'
 
 services:
-  # db:
-  #   image: mysql:8.0.19
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   restart: always
-  #   environment:
-  #     # the image will only initialize the database if the data directory is empty
-  #     MYSQL_DATABASE: starterkit
-  #     MYSQL_USER: starter
-  #     MYSQL_PASSWORD: starter
-  #     MYSQL_ROOT_PASSWORD: starter
-  #   ports: 
-  #     - 3306:3306
+  db:
+    image: mysql:8.0.19
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      # the image will only initialize the database if the data directory is empty
+      MYSQL_DATABASE: starterkit
+      MYSQL_USER: starter
+      MYSQL_PASSWORD: starter
+      MYSQL_ROOT_PASSWORD: starter
+    ports:
+      - 3306:3306
 
   test-db:
     image: mysql:8.0.19
@@ -27,11 +27,11 @@ services:
     ports:
       - 6603:3306
 
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8888:8080
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8888:8080
 
   mailhog:
     image: mailhog/mailhog

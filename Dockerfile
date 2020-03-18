@@ -23,11 +23,10 @@ COPY --from=BUILDER /app .
 # COPY crontabs/busybox.conf /etc/busybox.conf
 # RUN chmod 600 /etc/busybox.conf
 
-
 USER root
 
 ENV DB_HOST=db
-ENV MODE=production
+ENV MODE=application
 
 ENV PORT=8080
 EXPOSE 8080

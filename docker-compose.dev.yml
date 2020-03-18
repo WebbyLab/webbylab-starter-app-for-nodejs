@@ -9,11 +9,12 @@ services:
     env_file:
         - .env
     environment:
-      MODE: development
+      MODE: application
       PORT: 8080
-      TEST_DB_HOST: test-db
-      TEST_DB_PORT: 3306
+      DB_HOST: db
+      MAIL_HOST: mailhog
     depends_on:
-      - test-db
+      - db
+      - mailhog
     volumes:
         - .:/app
