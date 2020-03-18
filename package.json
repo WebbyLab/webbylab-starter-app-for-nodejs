@@ -9,7 +9,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "nodemon": "MODE=development nodemon app.js",
+    "nodemon": "MODE=application nodemon app.js",
+    "nodemon:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "test:lint": "eslint lib tests app.js --ext js",
     "test:mocha": "cross-env MODE=test node node_modules/.bin/_mocha $npm_package_config_MOCHA_OPTS",
     "test:coverage": "npm run coverage && npm run coverage-check",
@@ -34,7 +35,6 @@
     "aws-serverless-express": "^3.3.5",
     "bluebird": "^3.7.2",
     "body-parser": "^1.18.3",
-    "bunyan-singletone-facade": "github:WebbyLab/bunyan-singletone-facade",
     "chista": "^1.0.0",
     "cls-hooked": "^4.2.2",
     "confme": "0.0.12",

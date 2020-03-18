@@ -20,9 +20,11 @@
 2. npm run migration:dev
 3. npm run nodemon
 
+
 ## RUN IN CONTAINER (DOCKER)
 1. make sure docker and docker-compose are installed 
-2. run docker-compose up
+2. run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+
 
 ## RUN PRODUCTION VERSION
 1. apt-get install mysql-server // (5.7.8 version)
