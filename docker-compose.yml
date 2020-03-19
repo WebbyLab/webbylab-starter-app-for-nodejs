@@ -40,6 +40,35 @@ services:
       - 1025:1025
       - 8025:8025
 
+# https://docs.min.io/docs/minio-server-configuration-guide.html
+  minio:
+    image: minio/minio
+    environment: 
+      MINIO_ACCESS_KEY: starterkit
+      MINIO_SECRET_KEY: starterkit
+    restart: always
+    volumes:
+      - 'minio:/data'
+    command: server /data
+    ports: 
+      - 9000:9000
+
+  minio-client:
+    image: minio/mc
+    environment: 
+      MINIO_ACCESS_KEY: starterkit
+      MINIO_SECRET_KEY: starterkit
+      MINIO_BUCKET: starterkit.local
+      MINIO_HOST: minio
+      MINIO_PORT: 9000
+      MINIO_IMAGES_DIR: images/
+    volumes:
+      - './minio.init:/minio.init'
+    entrypoint: sh
+    depends_on:
+      - minio
+    command: /minio.init/init.sh
+
   # is used for images resize on fly
   # https://docs.imgproxy.net/#/
   imgproxy:
@@ -54,3 +83,8 @@ services:
       - IMGPROXY_SALT=646576656C6F706D656E74
     ports:
       - 5555:8080
+    depends_on:
+      - minio
+
+volumes:
+  minio:
