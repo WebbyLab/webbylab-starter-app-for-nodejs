@@ -18,7 +18,7 @@ const app = express();
 app.use(middlewares.json);
 app.use(middlewares.urlencoded);
 app.use(middlewares.cors);
-app.use(middlewares.multipart);
+// app.use(middlewares.multipart);
 app.use(middlewares.include);
 app.use('/api/v1', router);
 
