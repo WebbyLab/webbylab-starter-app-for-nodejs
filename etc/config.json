@@ -39,5 +39,44 @@
         "dialect": "{{TEST_DB_DIALECT}}",
         "host": "{{TEST_DB_HOST}}",
         "port": "{{TEST_DB_PORT}}"
+    },
+    "imgproxy" : {
+        "key" : "{{IMGPROXY_KEY}}",
+        "salt" : "{{IMGPROXY_SALT}}",
+        "domen" : "{{IMGPROXY_DOMEN}}"
+    },
+    "imageSizes": {
+        "o" : {
+            "width"  : 0,
+            "height" : 0
+        },
+        "xs" : {
+            "width"  : 120,
+            "height" : 120
+        },
+        "s" : {
+            "width"  : 180,
+            "height" : 120
+        },
+        "m" : {
+            "width"  : 200,
+            "height" : 200
+        },
+        "l" : {
+            "width"  : 535,
+            "height" : 350
+        },
+        "xl" : {
+            "width"  : 650,
+            "height" : 455
+        },
+        "xxl" : {
+            "width"  : 680,
+            "height" : 320
+        },
+        "xxxl" : {
+            "width"  : 820,
+            "height" : 422
+        }
     }
 }

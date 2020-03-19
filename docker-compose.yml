@@ -39,3 +39,18 @@ services:
     ports: 
       - 1025:1025
       - 8025:8025
+
+  # is used for images resize on fly
+  # https://docs.imgproxy.net/#/
+  imgproxy:
+    image: darthsim/imgproxy:latest
+    environment: 
+      - IMGPROXY_DOWNLOAD_BUFFER_SIZE=2097152
+      - IMGPROXY_ENABLE_WEBP_DETECTION=true
+      - IMGPROXY_ENFORCE_WEBP=true
+      - IMGPROXY_GZIP_BUFFER_SIZE=1048576
+      - IMGPROXY_GZIP_COMPRESSION=5
+      - IMGPROXY_KEY=646576656C6F706D656E74
+      - IMGPROXY_SALT=646576656C6F706D656E74
+    ports:
+      - 5555:8080
