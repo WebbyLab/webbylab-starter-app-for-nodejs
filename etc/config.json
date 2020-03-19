@@ -1,15 +1,16 @@
 {
+    "appPort": "{{PORT}}",
     "mainUrl": "{{MAIN_URL}}",
     "staticUrl": "{{STATIC_URL}}",
     "secret":  "{{SECRET}}",
-    "appPort": "{{PORT}}",
     "testStaticPath": "{{TEST_STATIC_PATH}}",
-    "postImagesMaxSize": "{{POST_IMAGES_MAX_SIZE}}",
+    "postImagesMaxSize": 4000000,
     "imagesPath"       : "{{IMAGES_PATH}}",
     "s3": {
         "accessKeyId": "{{S3_ACCESS_KEY_ID}}",
         "secretAccessKey": "{{S3_SECRET_ACCESS_KEY}}",
-        "bucket": "{{S3_BUCKET}}"
+        "bucket": "{{S3_BUCKET}}",
+        "endpoint": "{{S3_ENDPOINT}}"
     },
     "mail": {
         "from": "{{MAIL_FROM}}",
