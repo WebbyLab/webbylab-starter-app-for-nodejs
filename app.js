@@ -1,11 +1,12 @@
 /* eslint import/imports-first:0  import/newline-after-import:0 */
 
-import express     from 'express';
-import middlewares from './lib/middlewares.js';
-import router      from './lib/router.js';
-import initModels  from './lib/models/initModels.js';
-import ServiceBase from './lib/services/ServiceBase.js';
-import config      from './etc/config.js';
+import express       from 'express';
+import middlewares   from './lib/middlewares.js';
+import router        from './lib/router.js';
+import initModels    from './lib/models/initModels.js';
+import ServiceBase   from './lib/services/ServiceBase.js';
+import config        from './etc/config.js';
+import { promisify } from './packages.js';
 import './lib/registerValidationRules.js';
 
 const { appPort } = config;
@@ -31,8 +32,23 @@ ServiceBase.setSequelizeInstanse(sequelize);
 
 /* istanbul ignore else  */
 if (!process.env.LAMBDA && process.env.MODE !== 'test') {
-    app.listen(appPort, () => {
+    const server = app.listen(appPort, () => {
         console.log(`[App] STARTING AT PORT ${appPort}`);
+        console.log(`[App] This process is your pid ${process.pid}`);
+    });
+
+    server.closeAsync = promisify(server.close);
+
+    process.on('SIGTERM', async () => {
+        console.log('[App] SIGTERM signal catched');
+
+        console.log('[App] Closing server');
+        await server.closeAsync();
+        console.log('[App] Closing sequelize connections');
+        await sequelize.close();
+
+        console.log('[App] Exit');
+        process.exit(0);
     });
 }
 
