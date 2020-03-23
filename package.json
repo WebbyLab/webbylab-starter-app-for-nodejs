@@ -20,7 +20,7 @@
     "stop": "pm2 delete modern-node-be -s &> /dev/null",
     "coverage": "cross-env MODE=test node -r node_modules/istanbul/lib/cli.js cover $npm_package_config_ISPARTA_OPTS node_modules/.bin/_mocha -- $npm_package_config_MOCHA_OPTS",
     "coverage-check": "cross-env MODE=test node_modules/istanbul/lib/cli.js check-coverage $npm_package_config_COVERAGE_OPTS",
-    "create-user": "node ./bin/add_user.js",
+    "create-admin": "node ./bin/add_admin.js",
     "migration:test": "sequelize db:migrate --config etc/config.cjs --env test-db",
     "migration:db": "sequelize db:migrate --config etc/config.cjs --env db",
     "create-lambda-proxy ": "claudia generate-serverless-express-proxy --express-module runner",
