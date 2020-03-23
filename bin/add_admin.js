@@ -10,12 +10,12 @@ const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
 
 const doc =
 `Usage:
-   add_admin.js --login=<login> --password=<password> [--drop]
+   add_admin.js --email=<email> --password=<password> [--drop]
    add_admin.js -h | --help
 
 Options:
    -h --help                 Show this screen.
-   -l --login <login>        Login for new admin.
+   -l --email <email>        Login for new admin.
    -p --password <password>  Password for new admin.
    -d --drop                 Drop database first.
 `;
@@ -29,7 +29,7 @@ async function dropAllAdmins() {
 async function main(opts) {
     initModels(config[dbMode]);
     const userData = {
-        login    : opts['--login'] ? opts['--login'] : 'admin@mail.com',
+        email    : opts['--email'] ? opts['--email'] : 'admin@mail.com',
         password : opts['--password']
     };
 
