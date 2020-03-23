@@ -2,7 +2,8 @@
 
 import express       from 'express';
 import middlewares   from './lib/middlewares.js';
-import router        from './lib/router.js';
+import adminRouter   from './lib/routers/adminRouter.js';
+import router        from './lib/routers/router.js';
 import initModels    from './lib/models/initModels.js';
 import ServiceBase   from './lib/services/ServiceBase.js';
 import config        from './etc/config.js';
@@ -21,6 +22,7 @@ app.use(middlewares.urlencoded);
 app.use(middlewares.cors);
 // app.use(middlewares.multipart);
 app.use(middlewares.include);
+app.use('/api/v1/admin', adminRouter);
 app.use('/api/v1', router);
 
 const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
@@ -34,7 +36,6 @@ ServiceBase.setSequelizeInstanse(sequelize);
 if (!process.env.LAMBDA && process.env.MODE !== 'test') {
     const server = app.listen(appPort, () => {
         console.log(`[App] STARTING AT PORT ${appPort}`);
-        console.log(`[App] This process is your pid ${process.pid}`);
     });
 
     server.closeAsync = promisify(server.close);
