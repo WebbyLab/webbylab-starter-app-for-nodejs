@@ -1,5 +1,5 @@
 
-const config = require('../etc/config.cjs');
+const config = require('../lib/config.cjs');
 
 module.exports = {
     up : (queryInterface, Sequelize) => {
