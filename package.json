@@ -9,9 +9,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "nodemon": "MODE=application nodemon app.js",
+    "nodemon": "MODE=application nodemon app.mjs",
     "nodemon:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-    "start": "MODE=application NODE_ENV=production node app.js",
+    "start": "MODE=application NODE_ENV=production node app.mjs",
     "test:lint": "eslint lib tests app.mjs --ext mjs",
     "test:mocha": "cross-env MODE=test node node_modules/.bin/_mocha $npm_package_config_MOCHA_OPTS",
     "test:coverage": "npm run coverage && npm run coverage-check",
@@ -19,7 +19,7 @@
     "test": "npm run test:lint && npm run test:audit && npm run test:mocha && npm run test:coverage",
     "coverage": "cross-env MODE=test node -r node_modules/istanbul/lib/cli.js cover $npm_package_config_ISPARTA_OPTS node_modules/.bin/_mocha -- $npm_package_config_MOCHA_OPTS",
     "coverage-check": "cross-env MODE=test node_modules/istanbul/lib/cli.js check-coverage $npm_package_config_COVERAGE_OPTS",
-    "create-admin": "node ./bin/add_admin.js",
+    "create-admin": "MODE=application node ./bin/add_admin.mjs",
     "migration:test": "sequelize db:migrate --config etc/config.cjs --env test-db",
     "migration:db": "sequelize db:migrate --config etc/config.cjs --env db"
   },
@@ -72,7 +72,7 @@
     "pre-commit": "^1.2.2"
   },
   "description": "NodeJS Backend Starterkit",
-  "main": "app.js",
+  "main": "app.mjs",
   "repository": {
     "type": "git",
     "url": "http://gitlab.webbylab.com/boilerplates/modern-node-be"
