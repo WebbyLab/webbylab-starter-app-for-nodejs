@@ -13,7 +13,7 @@
     "nodemon:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "start": "MODE=application NODE_ENV=production node app.mjs",
     "test:lint": "eslint lib tests app.mjs --ext mjs",
-    "test:mocha": "cross-env MODE=test node node_modules/.bin/_mocha $npm_package_config_MOCHA_OPTS",
+    "test:mocha": "cross-env MODE=test node --experimental-json-modules tests/use-cases.test.mjs",
     "test:coverage": "npm run coverage && npm run coverage-check",
     "test:audit": "npm audit",
     "test": "npm run test:lint && npm run test:audit && npm run test:mocha && npm run test:coverage",
