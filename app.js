@@ -33,7 +33,7 @@ const { sequelize } = initModels(config[dbMode]);
 ServiceBase.setSequelizeInstanse(sequelize);
 
 /* istanbul ignore else  */
-if (!process.env.LAMBDA && process.env.MODE !== 'test') {
+if (process.env.MODE !== 'test') {
     const server = app.listen(appPort, () => {
         console.log(`[App] STARTING AT PORT ${appPort}`);
     });

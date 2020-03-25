@@ -21,10 +21,7 @@
     "coverage-check": "cross-env MODE=test node_modules/istanbul/lib/cli.js check-coverage $npm_package_config_COVERAGE_OPTS",
     "create-admin": "node ./bin/add_admin.js",
     "migration:test": "sequelize db:migrate --config etc/config.cjs --env test-db",
-    "migration:db": "sequelize db:migrate --config etc/config.cjs --env db",
-    "create-lambda-proxy ": "claudia generate-serverless-express-proxy --express-module runner",
-    "create-lambda": "claudia create --handler lambda.handler --deploy-proxy-api --region eu-central-1 --role modern-node-be-executor --aws-client-timeout 1200000 --set-env-from-json lambda.env.json",
-    "update-lambda": "claudia update --handler lambda.handler --deploy-proxy-api --region eu-central-1 --role modern-node-be-executor --aws-client-timeout 1200000 --set-env-from-json lambda.env.json"
+    "migration:db": "sequelize db:migrate --config etc/config.cjs --env db"
   },
   "pre-commit": [
     "test:lint"
