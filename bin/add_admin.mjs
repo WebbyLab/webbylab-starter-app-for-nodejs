@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 import { docopt } from '../packages.mjs';
 
-import config     from '../lib/config.mjs';
+import config     from '../lib/config.cjs';
 import Admin      from '../lib/domain-model/Admin.mjs';
 import initModels from '../lib/domain-model/initModels.mjs';
-
-const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
 
 const doc =
 `Usage:
@@ -26,7 +24,7 @@ async function dropAllAdmins() {
 }
 
 async function main(opts) {
-    initModels(config[dbMode]);
+    initModels(config.db);
     const userData = {
         email    : opts['--email'] ? opts['--email'] : 'admin@mail.com',
         password : opts['--password']

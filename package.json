@@ -19,9 +19,9 @@
     "test": "npm run test:lint && npm run test:audit && npm run test:mocha && npm run test:coverage",
     "coverage": "cross-env MODE=test node -r node_modules/istanbul/lib/cli.js cover $npm_package_config_ISPARTA_OPTS node_modules/.bin/_mocha -- $npm_package_config_MOCHA_OPTS",
     "coverage-check": "cross-env MODE=test node_modules/istanbul/lib/cli.js check-coverage $npm_package_config_COVERAGE_OPTS",
-    "create-admin": "MODE=application node ./bin/add_admin.mjs",
-    "migration:test": "sequelize db:migrate --config etc/config.cjs --env test-db",
-    "migration:db": "sequelize db:migrate --config etc/config.cjs --env db"
+    "create-admin": "node ./bin/add_admin.mjs",
+    "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
+    "migration:db": "sequelize db:migrate --config lib/config.cjs --env db"
   },
   "pre-commit": [
     "test:lint"
