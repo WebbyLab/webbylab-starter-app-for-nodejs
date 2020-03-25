@@ -2,8 +2,8 @@
 import { docopt } from '../packages.mjs';
 
 import config     from '../lib/config.mjs';
-import Admin      from '../lib/models/Admin.mjs';
-import initModels from '../lib/models/initModels.mjs';
+import Admin      from '../lib/domain-model/Admin.mjs';
+import initModels from '../lib/domain-model/initModels.mjs';
 
 const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
 
