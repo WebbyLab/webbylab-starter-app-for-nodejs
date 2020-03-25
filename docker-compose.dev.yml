@@ -1,20 +1,15 @@
 version: '3.7'
 
 services:
-  backend:
-    build: ./
-    command: npm run nodemon
-    ports:
-        - 8080:8080
-    env_file:
-        - .env
-    environment:
-      MODE: application
-      PORT: 8080
-      DB_HOST: db
-      MAIL_HOST: mailhog
-    depends_on:
-      - db
-      - mailhog
-    volumes:
-        - .:/app
+    backend:
+        build: ./
+        command: npm run nodemon
+        ports: ['8080:8080']
+        env_file: ['.env']
+        depends_on: ['db', 'mailhog']
+        volumes: ['.:/app']
+        environment:
+            MODE: application
+            PORT: 8080
+            DB_HOST: db
+            MAIL_HOST: mailhog
