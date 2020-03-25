@@ -1,8 +1,7 @@
-import { fileURLToPath } from 'url';
-import { dirname }       from 'path';
-import confme            from 'confme';
+import confme         from 'confme';
+import { getDirName } from '../lib/utils/index.mjs';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = getDirName(import.meta.url);
 
 const config = confme(`${__dirname}/config.json`);
 
