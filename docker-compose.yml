@@ -62,8 +62,8 @@ services:
         depends_on: ['minio']
         environment: 
             IMGPROXY_DOWNLOAD_BUFFER_SIZE: 2097152
-            IMGPROXY_ENABLE_WEBP_DETECTION: true
-            IMGPROXY_ENFORCE_WEBP: true
+            IMGPROXY_ENABLE_WEBP_DETECTION: 'true'
+            IMGPROXY_ENFORCE_WEBP: 'true'
             IMGPROXY_GZIP_BUFFER_SIZE: 1048576
             IMGPROXY_GZIP_COMPRESSION: 5
             IMGPROXY_KEY: 1111111111111111111111
