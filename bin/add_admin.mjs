@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { docopt } from '../packages.mjs';
 
-import config     from '../etc/config.mjs';
-
+import config     from '../lib/config.mjs';
 import Admin      from '../lib/models/Admin.mjs';
 import initModels from '../lib/models/initModels.mjs';
 

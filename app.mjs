@@ -6,7 +6,7 @@ import adminRouter   from './lib/routers/adminRouter.mjs';
 import router        from './lib/routers/router.mjs';
 import initModels    from './lib/models/initModels.mjs';
 import ServiceBase   from './lib/services/ServiceBase.mjs';
-import config        from './etc/config.mjs';
+import config        from './lib/config.mjs';
 import { promisify } from './packages.mjs';
 import './lib/registerValidationRules.mjs';
 
