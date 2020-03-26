@@ -1,34 +1,33 @@
+import test           from 'ava';
 import { getDirName } from '../lib/utils/index.mjs';
-import Tester from './lib/Tester.mjs';
+import Tester         from './lib/Tester.mjs';
 
-const t = new Tester();
+const tester = new Tester();
 
-const dirname = process.env.MODE === 'test' ? __dirname : getDirName(import.meta.url);
+const dirname = getDirName(import.meta.url);
 
 const testDirs = [
     'use-cases/users-create/positive',
     'use-cases/users-create/negative'
 ];
 
-const lastTestDir = testDirs[testDirs.length - 1];
-
 for (const testDir of testDirs) {
-    t.iterateInTransaction(`${dirname}/${testDir}`,
-        async ({ config: { serviceClass, before }, input, expected }) => {
+    tester.iterateInTransaction(`${dirname}/${testDir}`,
+        async ({ config: { serviceClass, before }, input, expected }, t) => {
             try {
-                await before(t.factory);
-                await t.testService({ serviceClass, input, expected });
+                await before(tester.factory);
+                await tester.testService({ serviceClass, input, expected }, t);
             } catch (error) {
                 console.log(error);
                 throw error;
             }
         },
-        testDir === lastTestDir
+        test
     );
 }
 
 // async function main() {
-//     await t.iterateInTransaction(`${__dirname}/use-cases/users-create/positive`,
+//     await t.iterateInTransaction(`${dirname}/use-cases/users-create/positive`,
 //         async ({ config: { serviceClass, before }, input, expected }) => {
 //             await before(t.factory);
 //             await t.testService({ serviceClass, input, expected });
@@ -44,14 +43,14 @@ for (const testDir of testDirs) {
 //     //     };
 //     // }
 
-//     // await t.iterateInTransaction(`${__dirname}/use-cases/users-create/positive`,
+//     // await t.iterateInTransaction(`${dirname}/use-cases/users-create/positive`,
 //     //     async ({ config: { before }, input, expected }) => {
 //     //         await before(t.factory);
 //     //         await t.testServiceViaRest({ requestBuilder, input, expected });
 //     //     }
 //     // );
 
-//     // await t.iterateInTransaction(`${__dirname}/use-cases/users-create/positive`,
+//     // await t.iterateInTransaction(`${dirname}/use-cases/users-create/positive`,
 //     //     async ({ config: { serviceClass, before }, input, expected }) => {
 //     //         await before(t.factory);
 //     //         await t.testServiceViaJSONRPC({ rpcMethod: serviceClass.name, input, expected });
