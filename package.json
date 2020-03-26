@@ -1,11 +1,6 @@
 {
   "name": "modern-node-be",
   "type": "module",
-  "config": {
-    "MOCHA_OPTS": "--timeout 60000 --exit --reporter spec --ui qunit tests/api/**/*.js",
-    "ISPARTA_OPTS": "--report html",
-    "COVERAGE_OPTS": "--statements 85 --functions 85 --branches 85 --lines 85"
-  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,12 +10,10 @@
     "test:lint": "eslint lib tests app.mjs --ext mjs",
     "test:mocha": "cross-env MODE=test node --experimental-json-modules tests/use-cases.test.mjs",
     "test:jest": "cross-env MODE=test jest --no-cache --config jest.config.mjs",
-    "test:ava": "cross-env MODE=test ava tests/use-cases.test.mjs",
-    "test:coverage": "npm run coverage && npm run coverage-check",
+    "test:ava": "cross-env MODE=test ava tests/use-cases.test.mjs --verbose",
+    "test:coverage": "c8 npm run test:ava",
     "test:audit": "npm audit",
     "test": "npm run test:lint && npm run test:audit && npm run test:mocha && npm run test:coverage",
-    "coverage": "npm run test:jest -- --coverage",
-    "coverage-check": "cross-env MODE=test node_modules/istanbul/lib/cli.js check-coverage $npm_package_config_COVERAGE_OPTS",
     "create-admin": "node ./bin/add_admin.mjs",
     "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
     "migration:db": "sequelize db:migrate --config lib/config.cjs --env db"
@@ -63,6 +56,7 @@
     "@babel/preset-env": "^7.9.0",
     "ava": "^3.5.1",
     "babel-eslint": "^10.1.0",
+    "c8": "^7.1.0",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-webbylab": "^4.0.0",
