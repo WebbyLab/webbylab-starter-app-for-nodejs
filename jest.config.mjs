@@ -10,7 +10,7 @@ export default {
         'js'
     ],
     transform : {
-        '.mjs' : 'jest-esm-transformer'
+        '\\.m?jsx?$' : 'jest-esm-transformer'
     },
     collectCoverageFrom : [
         '**/lib/**/*.mjs',

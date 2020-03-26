@@ -12,7 +12,7 @@
     "nodemon": "MODE=application nodemon app.mjs",
     "nodemon:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "start": "MODE=application NODE_ENV=production node app.mjs",
-    "test:lint": "eslint lib app.mjs --ext mjs",
+    "test:lint": "eslint lib tests app.mjs --ext mjs",
     "test:mocha": "cross-env MODE=test node --experimental-json-modules tests/use-cases.test.mjs",
     "test:jest": "cross-env MODE=test jest --no-cache --config jest.config.mjs",
     "test:coverage": "npm run coverage && npm run coverage-check",

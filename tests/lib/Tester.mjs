@@ -54,7 +54,8 @@ class Tester {
         for (const file of files) {
             const key = file.replace(/\..+$/, '');
 
-            data[key] = await import(`${rootDir}/${dir}/${file}`);
+            // TODO: change, when propper support of dynamic imports will be added to eslint
+            data[key] = require(`${rootDir}/${dir}/${file}`);
 
             // TODO: change. Used for JSON imports and default exports
             if (data[key].default) {
