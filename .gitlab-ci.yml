@@ -24,14 +24,14 @@ test-security:
     - cp etc/db.json.sample etc/db.json
     - npm run test:audit
 
-test-jest:
+test-ava:
   stage: test
   script:
     - npm install
     - cp etc/config.json.sample etc/config.json
     - cp etc/db.json.sample etc/db.json
     - npm run migration-test
-    - npm run test:jest
+    - npm run test:ava
 
 test-coverage:
   stage: test
