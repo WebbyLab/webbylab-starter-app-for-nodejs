@@ -1,0 +1,8 @@
+{
+    "code": "FORMAT_ERROR",
+    "fields": {
+        "data": {
+            "agreeWithTerms": "REQUIRED"
+        }
+    }
+}

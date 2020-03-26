@@ -1,8 +1,7 @@
 {
     "data": {
-        "email": "username@mail.com",
+        "email": "username1@mail.com",
         "password": "somePassword",
-        "confirmPassword": "somePassword",
-        "agreeWithTerms": true
+        "confirmPassword": "somePassword"
     }
 }

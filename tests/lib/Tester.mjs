@@ -11,13 +11,14 @@ import initAllModels      from '../../lib/domain-model/initModels.mjs';
 import appConfig          from '../../lib/config.cjs';
 // import app                from '../../app';
 // import rpcApp             from '../../lib/json-rpc/app';
+import { Exception } from '../../packages.mjs';
 import TestFactory        from './TestFactory.mjs';
 
 const fs = FileSystem.promises;
 
 // This function is needed to make linter alive for current file
 // eslint-disable-next-line func-style
-const loadFile = (path) => import(path);
+const lazyImport = (path) => import(path);
 
 // const WSS_PORT = 12345;
 
@@ -58,7 +59,7 @@ class Tester {
         for (const file of files) {
             const key = file.replace(/\..+$/, '');
 
-            data[key] = await loadFile(`${rootDir}/${dir}/${file}`);
+            data[key] = await lazyImport(`${rootDir}/${dir}/${file}`);
 
             // TODO: change. Used for JSON imports and default exports
             if (data[key].default) {
@@ -72,10 +73,8 @@ class Tester {
     iterateInTransaction(rootDir, cb, test) {
         const dirs = this.readTestDirs(rootDir);
 
-        // describe(rootDir, () => {
         let rootData = {};
 
-        // eslint-disable-next-line no-undef
         test.before(async () => {
             rootData = await this.readTestData(rootDir, '');
         });
@@ -89,8 +88,9 @@ class Tester {
                     await this.sequelize.transaction(async t1 => {
                         global.testTransaction = t1;
 
-                            await cb({ ...rootData, ...data}, t); // eslint-disable-line
-                        global.withTestTransaction = null;
+                        await cb({ ...rootData, ...data }, t); // eslint-disable-line callback-return
+                        // global.withTestTransaction = null;
+                        global.testTransaction = null;
                         await t1.rollback();
                     });
                 } catch (error) {
@@ -103,21 +103,19 @@ class Tester {
             });
         }
 
-        // eslint-disable-next-line no-undef
         test.after(async () => {
             await this.sequelize.close();
         });
-        // });
     }
 
-    async testService({ serviceClass: Service, input = {}, expected = {} } = {}, t) {
+    async testService({ serviceClass: Service, input = {}, expected = {}, exception } = {}, t) {
         function serviceRunner() {
             const service = new Service({ context: {} });
 
             return service.run(input);
         }
 
-        await this._testServiceAbstract({ serviceRunner, expected }, t);
+        await this._testServiceAbstract({ serviceRunner, expected, exception }, t);
     }
 
     // async testServiceViaRest({ requestBuilder, input = {}, expected = {} } = {}) {
@@ -148,7 +146,18 @@ class Tester {
     //     await this._testServiceAbstract({ serviceRunner, expected });
     // }
 
-    async _testServiceAbstract({ serviceRunner, expected = {} } = {}, t) {
+    async _testServiceAbstract({ serviceRunner, expected = {}, exception = null } = {}, t) {
+        if (exception) {
+            const error = await t.throwsAsync(
+                serviceRunner,
+                { instanceOf: Exception }
+            );
+
+            t.deepEqual(error, new Exception(exception));
+
+            return;
+        }
+
         const got = await serviceRunner();
         const validator = new LIVR.Validator(expected);
 

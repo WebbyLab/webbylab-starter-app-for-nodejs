@@ -13,10 +13,10 @@ const testDirs = [
 
 for (const testDir of testDirs) {
     tester.iterateInTransaction(`${dirname}/${testDir}`,
-        async ({ config: { serviceClass, before }, input, expected }, t) => {
+        async ({ config: { serviceClass, before }, input, expected, exception }, t) => {
             try {
                 await before(tester.factory);
-                await tester.testService({ serviceClass, input, expected }, t);
+                await tester.testService({ serviceClass, input, expected, exception }, t);
             } catch (error) {
                 console.log(error);
                 throw error;
