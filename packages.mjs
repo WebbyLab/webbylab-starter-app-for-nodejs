@@ -4,7 +4,7 @@ import _Exception   from 'chista/Exception.js';
 import _bluebird    from 'bluebird';
 import _docopt      from 'docopt';
 
-export const ServiceBase  = _ServiceBase.default;
+export const ServiceBase  = _ServiceBase.default ? _ServiceBase.default : _ServiceBase;
 export const Exception    = _Exception.default;
 export const DataTypes    = _Sequelize.DataTypes;
 export const Op           = _Sequelize.Op;

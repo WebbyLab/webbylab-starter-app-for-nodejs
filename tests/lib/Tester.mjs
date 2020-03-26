@@ -1,7 +1,6 @@
-import { promises as fs } from 'fs';
-import chai         from 'chai';
-import LIVR               from 'livr';
-import extraRules         from 'livr-extra-rules';
+import FileSystem from 'fs';
+import LIVR       from 'livr';
+import extraRules from 'livr-extra-rules';
 // import fetch              from 'node-fetch';
 
 // import TransportClientWS  from 'mole-rpc-transport-ws/TransportClientWS';
@@ -14,9 +13,9 @@ import appConfig          from '../../lib/config.cjs';
 // import rpcApp             from '../../lib/json-rpc/app';
 import TestFactory        from './TestFactory.mjs';
 
-// const WSS_PORT = 12345;
+const fs = FileSystem.promises;
 
-const assert = chai.assert;
+// const WSS_PORT = 12345;
 
 class Tester {
     constructor() {
@@ -37,58 +36,72 @@ class Tester {
         // });
     }
 
-    async iterateTestData(rootDir, cb) {
-        const items = await fs.readdir(rootDir, { withFileTypes: true });
+    readTestDirs(rootDir) {
+        // eslint-disable-next-line no-sync
+        const items = FileSystem.readdirSync(rootDir, { withFileTypes: true });
         const dirs = items.filter(f => f.isDirectory()).map(f => f.name);
-        const rootFiles = items.filter(f => f.isFile()).map(f => f.name);
 
-        const rootData = {};
-
-        for (const file of rootFiles) {
-            const key = file.replace(/\..+$/, '');
-
-            rootData[key] = await import(`${rootDir}/${file}`);
-
-            // TODO: change. Used for JSON imports and default exports
-            if (rootData[key].default) {
-                rootData[key] = rootData[key].default;
-            }
-        }
-
-        for (const dir of dirs) {
-            const files = (await fs.readdir(`${rootDir}/${dir}`, { withFileTypes: true }))
-                .filter(f => f.isFile())
-                .map(f => f.name);
-
-            const data = {};
-
-            for (const file of files) {
-                const key = file.replace(/\..+$/, '');
-
-                data[key] = await import(`${rootDir}/${dir}/${file}`);
-
-                // TODO: change. Used for JSON imports and default exports
-                if (data[key].default) {
-                    data[key] = data[key].default;
-                }
-            }
-
-            await cb({...rootData, ...data}); // eslint-disable-line
-        }
+        return dirs;
     }
 
-    async iterateInTransaction(rootDir, cb) {
-        await this.iterateTestData(rootDir, async data => {
-            await this.sequelize.transaction(async t1 => {
-                global.testTransaction = t1;
+    async readTestData(rootDir, dir) {
+        const files = (await fs.readdir(`${rootDir}/${dir}`, { withFileTypes: true }))
+            .filter(f => f.isFile())
+            .map(f => f.name);
 
-                await cb(data); // eslint-disable-line
-                global.withTestTransaction = null;
-                await t1.rollback();
-            }).catch(error => {
-                if (!error.message.match(/rollback/)) {
-                    console.log(error);
-                }
+        const data = {};
+
+        for (const file of files) {
+            const key = file.replace(/\..+$/, '');
+
+            data[key] = await import(`${rootDir}/${dir}/${file}`);
+
+            // TODO: change. Used for JSON imports and default exports
+            if (data[key].default) {
+                data[key] = data[key].default;
+            }
+        }
+
+        return data;
+    }
+
+    iterateInTransaction(rootDir, cb, isLast = false) {
+        const dirs = this.readTestDirs(rootDir);
+
+        describe(rootDir, () => {
+            let rootData = {};
+
+            // eslint-disable-next-line no-undef
+            beforeAll(async () => {
+                rootData = await this.readTestData(rootDir, '');
+            });
+
+            for (const dir of dirs) {
+                // eslint-disable-next-line no-loop-func
+                test(dir, async () => {
+                    try {
+                        const data = await this.readTestData(rootDir, dir);
+
+                        await this.sequelize.transaction(async t1 => {
+                            global.testTransaction = t1;
+
+                            await cb({ ...rootData, ...data}); // eslint-disable-line
+                            global.withTestTransaction = null;
+                            await t1.rollback();
+                        });
+                    } catch (error) {
+                        if (!error.message.match(/rollback/)) {
+                            // console.log(error);
+
+                            throw error;
+                        }
+                    }
+                });
+            }
+
+            // eslint-disable-next-line no-undef
+            afterAll(async () => {
+                if (isLast) await this.sequelize.close();
             });
         });
     }
@@ -131,39 +144,27 @@ class Tester {
     //     await this._testServiceAbstract({ serviceRunner, expected });
     // }
 
-
     async _testServiceAbstract({ serviceRunner, expected = {} } = {}) {
-        try {
-            const got = await serviceRunner();
+        const got = await serviceRunner();
+        const validator = new LIVR.Validator(expected);
 
-            console.log('GOT', got);
-            console.log('EXPECTED', expected);
+        validator.registerRules(extraRules);
+        validator.prepare();
 
-            const validator = new LIVR.Validator(expected);
+        const validated = validator.validate(got);
 
-            validator.registerRules(extraRules);
-            validator.prepare();
-
-            const validated = validator.validate(got);
-
-            if (!validator.validate(got)) {
-                throw new Error(JSON.stringify({
-                    got,
-                    errors : validator.getErrors()
-                }, null, 4));
-            }
-
-            console.log('VALIDATED', validated);
-
-            // For strict equality
-            delete got.status; // TODO: remove this dirty hack
-            assert.deepEqual(got, validated);
-
-            // assert.deepInclude(got.data, expected.data);
-        } catch (error) {
-            console.log('ERROR');
-            console.log('error', error);
+        if (!validator.validate(got)) {
+            // eslint-disable-next-line no-undef
+            expect(validator.getErrors()).toBe({});
         }
+
+        // For strict equality
+        delete got.status; // TODO: remove this dirty hack
+        // eslint-disable-next-line no-undef
+        expect(got).toEqual(validated);
+        // assert.deepEqual(got, validated);
+
+        // assert.deepInclude(got.data, expected.data);
     }
 }
 
