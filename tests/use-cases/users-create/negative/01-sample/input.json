@@ -1,7 +1,0 @@
-{
-    "data": {
-        "email": "username1@mail.com",
-        "password": "somePassword",
-        "confirmPassword": "somePassword"
-    }
-}
