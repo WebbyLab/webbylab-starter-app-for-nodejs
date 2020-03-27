@@ -1,4 +1,4 @@
-import UsersCreate from '../../../../lib/use-cases/users/Create.mjs';
+import UsersCreate from '../../../../../lib/use-cases/users/Create.mjs';
 
 // export const serviceClass = UsersCreate;
 // export async function before(factory) {

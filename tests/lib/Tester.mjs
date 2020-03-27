@@ -1,18 +1,14 @@
-import FileSystem from 'fs';
-import LIVR       from 'livr';
-import extraRules from 'livr-extra-rules';
-// import fetch              from 'node-fetch';
+import FileSystem    from 'fs';
+import test          from 'ava';
+import LIVR          from 'livr';
+import extraRules    from 'livr-extra-rules';
 
-// import TransportClientWS  from 'mole-rpc-transport-ws/TransportClientWS';
-// import MoleClient         from 'mole-rpc/MoleClient';
-// import WebSocket          from 'ws';
-
-import initAllModels      from '../../lib/domain-model/initModels.mjs';
-import appConfig          from '../../lib/config.cjs';
-// import app                from '../../app';
-// import rpcApp             from '../../lib/json-rpc/app';
+import initAllModels from '../../lib/domain-model/initModels.mjs';
+import UseCaseBase   from '../../lib/use-cases/Base.mjs';
+import appConfig     from '../../lib/config.cjs';
 import { Exception } from '../../packages.mjs';
-import TestFactory        from './TestFactory.mjs';
+
+import TestFactory   from './TestFactory.mjs';
 
 const fs = FileSystem.promises;
 
@@ -20,25 +16,16 @@ const fs = FileSystem.promises;
 // eslint-disable-next-line func-style
 const lazyImport = (path) => import(path);
 
-// const WSS_PORT = 12345;
-
 class Tester {
     constructor() {
         const { sequelize } = initAllModels(appConfig['test-db']);
+
+        UseCaseBase.setSequelizeInstanse(sequelize); // TODO find a better way
 
         global.sequelize = sequelize; // TODO find a better way
 
         this.sequelize = sequelize;
         this.factory = new TestFactory();
-        // this.app = app;
-        // this.rpcApp = rpcApp;
-
-        // this.moleClient = new MoleClient({
-        //     requestTimeout : 1000,
-        //     transport      : new TransportClientWS({
-        //         wsBuilder : () => new WebSocket(`ws://localhost:${WSS_PORT}`)
-        //     })
-        // });
     }
 
     readTestDirs(rootDir) {
@@ -70,7 +57,7 @@ class Tester {
         return data;
     }
 
-    iterateInTransaction(rootDir, cb, test) {
+    setupTestsWithTransactions(rootDir, cb) {
         const dirs = this.readTestDirs(rootDir);
 
         let rootData = {};
@@ -86,12 +73,17 @@ class Tester {
                     const data = await this.readTestData(rootDir, dir);
 
                     await this.sequelize.transaction(async t1 => {
-                        global.testTransaction = t1;
-
-                        await cb({ ...rootData, ...data }, t); // eslint-disable-line callback-return
-                        // global.withTestTransaction = null;
-                        global.testTransaction = null;
-                        await t1.rollback();
+                        try {
+                            this.testContext = t;
+                            global.testTransaction = t1;
+                            await cb({ ...rootData, ...data }); // eslint-disable-line callback-return
+                        } catch (error) {
+                            throw error;
+                        } finally {
+                            global.withTestTransaction = null;
+                            // global.testTransaction = null;
+                            await t1.rollback();
+                        }
                     });
                 } catch (error) {
                     if (!error.message.match(/rollback/)) {
@@ -108,56 +100,27 @@ class Tester {
         });
     }
 
-    async testService({ serviceClass: Service, input = {}, expected = {}, exception } = {}, t) {
+    async testUseCasePositive({ serviceClass: Service, input = {}, expected = {} } = {}) {
         function serviceRunner() {
             const service = new Service({ context: {} });
 
             return service.run(input);
         }
 
-        await this._testServiceAbstract({ serviceRunner, expected, exception }, t);
+        await this._testUseCasePositiveAbstract({ serviceRunner, expected }, this.testContext);
     }
 
-    // async testServiceViaRest({ requestBuilder, input = {}, expected = {} } = {}) {
-    //     async function serviceRunner() {
-    //         const request = requestBuilder(input);
-    //         const apiPrefix = 'http://localhost:8000';
-    //         const response = await fetch(`${apiPrefix}${request.url}`, {
-    //             method  : request.method,
-    //             headers : {
-    //                 'Content-Type' : 'application/json'
-    //             },
-    //             body : JSON.stringify(request.body)
-    //         });
+    async testUseCaseNegative({ serviceClass: Service, input = {}, exception = {} } = {}) {
+        function serviceRunner() {
+            const service = new Service({ context: {} });
 
-    //         console.log(response);
-
-    //         return response.json();
-    //     }
-
-    //     await this._testServiceAbstract({ serviceRunner, expected });
-    // }
-
-    // async testServiceViaJSONRPC({ rpcMethod, input = {}, expected = {} } = {}) {
-    //     const serviceRunner = () => {
-    //         return this.moleClient.callMethod(rpcMethod, [ input ]);
-    //     };
-
-    //     await this._testServiceAbstract({ serviceRunner, expected });
-    // }
-
-    async _testServiceAbstract({ serviceRunner, expected = {}, exception = null } = {}, t) {
-        if (exception) {
-            const error = await t.throwsAsync(
-                serviceRunner,
-                { instanceOf: Exception }
-            );
-
-            t.deepEqual(error, new Exception(exception));
-
-            return;
+            return service.run(input);
         }
 
+        await this._testUseCaseNegativeAbstract({ serviceRunner, exception }, this.testContext);
+    }
+
+    async _testUseCasePositiveAbstract({ serviceRunner, expected = {} } = {}, assert) {
         const got = await serviceRunner();
         const validator = new LIVR.Validator(expected);
 
@@ -167,19 +130,26 @@ class Tester {
         const validated = validator.validate(got);
 
         if (!validator.validate(got)) {
-            // eslint-disable-next-line no-undef
-            t.deepEqual(validator.getErrors(), {});
+            const validationErrors = validator.getErrors();
+
+            console.log(validationErrors);
+
+            assert.deepEqual(validationErrors, {});
         }
 
         // For strict equality
         delete got.status; // TODO: remove this dirty hack
-        // eslint-disable-next-line no-undef
-        t.deepEqual(got, validated);
-        // assert.deepEqual(got, validated);
+        assert.deepEqual(got, validated);
+    }
 
-        // assert.deepInclude(got.data, expected.data);
+    async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert) {
+        const error = await assert.throwsAsync(
+            serviceRunner,
+            { instanceOf: Exception }
+        );
+
+        assert.deepEqual(error, new Exception(exception));
     }
 }
-
 
 export default Tester;
