@@ -10,7 +10,7 @@ class TestFactory {
     }
 
     async setupUsers() {
-        await this._createDefaultUsers();
+        return this._createDefaultUsers();
     }
 
     async _createDefaultUsers() {

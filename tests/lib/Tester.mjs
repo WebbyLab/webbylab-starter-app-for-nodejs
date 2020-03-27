@@ -86,9 +86,7 @@ class Tester {
                         }
                     });
                 } catch (error) {
-                    if (!error.message.match(/rollback/)) {
-                        // console.log(error);
-
+                    if (!error.message || !error.message.match(/rollback/)) {
                         throw error;
                     }
                 }
