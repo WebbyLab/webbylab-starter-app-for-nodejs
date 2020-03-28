@@ -27,6 +27,14 @@ class TestFactory {
                 password       : 'password',
                 status         : 'ACTIVE',
                 agreeWithTerms : true
+            },
+            {
+                email          : 'default3@gmail.com',
+                firstName      : 'Third',
+                secondName     : 'Default',
+                password       : 'password',
+                status         : 'BLOCKED',
+                agreeWithTerms : true
             }
         ];
         const savedUsers = await User.bulkCreate(users);

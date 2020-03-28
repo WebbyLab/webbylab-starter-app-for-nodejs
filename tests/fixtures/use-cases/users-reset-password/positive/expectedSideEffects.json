@@ -1,0 +1,12 @@
+{
+    "actions": ["required", "not_empty_list", {"list_of_objects": {
+        "id": ["required", "uuid"],
+            "type": {"is": "RESET_USER_PASSWORD"},
+            "data": ["required", {"nested_object": {
+                "email": {"is": "default2@gmail.com"},
+                "userId": ["required", "uuid"]
+              }}],
+            "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+            "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    } }]
+}

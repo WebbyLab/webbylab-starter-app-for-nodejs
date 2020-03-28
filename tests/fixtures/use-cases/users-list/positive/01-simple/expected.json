@@ -10,8 +10,8 @@
         "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
     } },
     "meta": { "nested_object": {
-        "totalCount": { "is": 2 },
-        "filteredCount": { "is": 2 },
+        "totalCount": { "is": 3 },
+        "filteredCount": { "is": 3 },
         "limit": { "is": 20 },
         "offset": { "is": 0 }
     } }
