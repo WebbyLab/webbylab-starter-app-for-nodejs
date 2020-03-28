@@ -1,4 +1,5 @@
-import User from '../../lib/domain-model/User.mjs';
+import Action from '../../lib/domain-model/Action.mjs';
+import User   from '../../lib/domain-model/User.mjs';
 
 class TestFactory {
     constructor() {
@@ -10,10 +11,6 @@ class TestFactory {
     }
 
     async setupUsers() {
-        return this._createDefaultUsers();
-    }
-
-    async _createDefaultUsers() {
         const users = [
             {
                 email          : 'default1@gmail.com',
@@ -35,6 +32,22 @@ class TestFactory {
         const savedUsers = await User.bulkCreate(users);
 
         return savedUsers;
+    }
+
+    async setupActions(userId) {
+        const actions = [
+            {
+                type : 'ACTIVATE_USER',
+                data : { userId }
+            },
+            {
+                type : 'RESET_USER_PASSWORD',
+                data : { userId }
+            }
+        ];
+        const savedActions = await Action.bulkCreate(actions);
+
+        return savedActions;
     }
 }
 

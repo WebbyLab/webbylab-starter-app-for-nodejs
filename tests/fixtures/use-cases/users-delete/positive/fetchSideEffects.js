@@ -4,11 +4,11 @@ import User       from '../../../../../lib/domain-model/User.mjs';
 import dumpEntity from '../../../../utils/dumpEntity.mjs';
 
 export default async function fetchSideEffects({ userId }) {
-    const user = await User.findById(userId);
+    const users = await User.findAll({ where: { id: userId } });
     const actions = await Action.findAll({ where: { data: { '"userId"': userId } } });
 
     return {
-        user    : dumpEntity(user),
+        users   : users.map(dumpEntity),
         actions : actions.map(dumpEntity)
     };
 }
