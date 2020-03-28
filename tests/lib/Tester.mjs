@@ -130,9 +130,10 @@ class Tester {
         if (!validator.validate(got)) {
             const validationErrors = validator.getErrors();
 
+            console.log(got);
             console.log(validationErrors);
 
-            assert.deepEqual(validationErrors, {});
+            assert.is(validationErrors, {});
         }
 
         // For strict equality

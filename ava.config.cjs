@@ -1,6 +1,12 @@
+/* eslint-disable import/no-commonjs */
 module.exports = {
-    'nodeArguments' : [
+    nodeArguments : [
         '--experimental-modules',
         '--experimental-json-modules'
+    ],
+    serial  : true,
+    verbose : true,
+    files   : [
+        'tests/use-cases/**'
     ]
 };

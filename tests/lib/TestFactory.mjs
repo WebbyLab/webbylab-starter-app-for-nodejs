@@ -18,7 +18,7 @@ class TestFactory {
             {
                 email          : 'default1@gmail.com',
                 firstName      : 'First',
-                lastName       : 'Defaulr',
+                secondName     : 'Default',
                 password       : 'password',
                 status         : 'PENDING',
                 agreeWithTerms : true
@@ -26,7 +26,7 @@ class TestFactory {
             {
                 email          : 'default2@gmail.com',
                 firstName      : 'Second',
-                lastName       : 'Default',
+                secondName     : 'Default',
                 password       : 'password',
                 status         : 'ACTIVE',
                 agreeWithTerms : true
