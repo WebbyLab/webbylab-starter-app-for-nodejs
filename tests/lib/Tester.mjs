@@ -105,7 +105,7 @@ class Tester {
             return service.run(input);
         }
 
-        await this._testUseCasePositiveAbstract({ serviceRunner, expected }, this.testContext);
+        return this._testUseCasePositiveAbstract({ serviceRunner, expected }, this.testContext);
     }
 
     async testUseCaseNegative({ serviceClass: Service, input = {}, exception = {} } = {}) {
@@ -115,7 +115,15 @@ class Tester {
             return service.run(input);
         }
 
-        await this._testUseCaseNegativeAbstract({ serviceRunner, exception }, this.testContext);
+        return this._testUseCaseNegativeAbstract({ serviceRunner, exception }, this.testContext);
+    }
+
+    async testSideEffects({ fetchSideEffects, expectedSideEffects = {}, input = {} } = {}) {
+        function serviceRunner() {
+            return fetchSideEffects(input);
+        }
+
+        return this._testUseCasePositiveAbstract({ serviceRunner, expected: expectedSideEffects }, this.testContext);
     }
 
     async _testUseCasePositiveAbstract({ serviceRunner, expected = {} } = {}, assert) {
@@ -139,6 +147,8 @@ class Tester {
         // For strict equality
         delete got.status; // TODO: remove this dirty hack
         assert.deepEqual(got, validated);
+
+        return got;
     }
 
     async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert) {

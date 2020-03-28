@@ -1,0 +1,26 @@
+{
+    "action": ["required", "not_empty_list", {"list_of_objects": {
+        "id": ["required", "uuid"],
+            "type": {"is": "ACTIVATE_USER"},
+            "data": ["required", {"nested_object": {
+                "email": {"is": "username@mail.com"},
+                "userId": ["required", "uuid"]
+              }}],
+            "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+            "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    } }],
+    "user": [ "required", { "nested_object": {
+        "id": ["required", "uuid"],
+        "email": {"is": "username@mail.com"},
+        "firstName": {"eq": ""},
+        "secondName": {"eq": ""},
+        "avatar": {"eq": ""},
+        "status": {"is": "PENDING"},
+        "lang": {"is": "EN"},
+        "salt": ["required", "string"],
+        "passwordHash": ["required", "string"],
+        "agreeWithTerms": {"is": true},
+        "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+        "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    }}]
+}
