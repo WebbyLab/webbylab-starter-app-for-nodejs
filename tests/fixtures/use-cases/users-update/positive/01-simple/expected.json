@@ -1,0 +1,22 @@
+{
+    "data": { "nested_object": {
+        "id": ["required", "uuid"],
+        "email": {"is": "default1@gmail.com"},
+        "firstName": {"is": "New First Name"},
+        "secondName": {"is": "New Second Name"},
+        "avatarUrl": ["required", {"nested_object": {
+            "o": ["required", "string"],
+            "xs": ["required", "string"],
+            "s": ["required", "string"],
+            "m": ["required", "string"],
+            "l": ["required", "string"],
+            "xl": ["required", "string"],
+            "xxl": ["required", "string"],
+            "xxxl": ["required", "string"],
+            "fileName": {"is": "path-to-image.png"}
+        }}],
+        "lang": {"is": "ua"},
+        "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+        "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    }}
+}
