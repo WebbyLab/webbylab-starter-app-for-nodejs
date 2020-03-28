@@ -1,5 +1,5 @@
 {
-    "action": ["required", "not_empty_list", {"list_of_objects": {
+    "actions": ["required", "not_empty_list", {"list_of_objects": {
         "id": ["required", "uuid"],
             "type": {"is": "ACTIVATE_USER"},
             "data": ["required", {"nested_object": {
