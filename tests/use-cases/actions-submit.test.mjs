@@ -14,12 +14,3 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/actions-subm
         await tester.testUseCasePositive({ serviceClass, input: { ...data, id: actionId }, expected });
     }
 );
-
-// tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/sessions-check/negative`,
-//     async ({ config: { serviceClass, before }, input, exception }) => {
-//         const tokens = await before(tester.factory);
-//         const token = tokens[input.email];
-
-//         await tester.testUseCaseNegative({ serviceClass, input: { token }, exception });
-//     }
-// );
