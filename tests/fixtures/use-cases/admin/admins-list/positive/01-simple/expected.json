@@ -1,0 +1,14 @@
+{
+    "data": { "list_of_objects": {
+        "id": ["required", "uuid"],
+        "email": ["required", "email"],
+        "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+        "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    } },
+    "meta": { "nested_object": {
+        "totalCount": { "is": 2 },
+        "filteredCount": { "is": 2 },
+        "limit": { "is": 20 },
+        "offset": { "is": 0 }
+    } }
+}

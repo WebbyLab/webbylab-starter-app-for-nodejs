@@ -5,7 +5,9 @@ export default {
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();
-        const actions = await factory.setupActions(users[0].id);
+        const admins = await factory.setupAdmins();
+
+        const actions = await factory.setupActions(users[0].id, admins[0].id);
 
         const actionsMap = {};
 
