@@ -78,6 +78,8 @@ class Tester {
                             global.testTransaction = t1;
                             await cb({ ...rootData, ...data }); // eslint-disable-line callback-return
                         } catch (error) {
+                            console.log(error);
+
                             throw error;
                         } finally {
                             global.withTestTransaction = null;

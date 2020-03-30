@@ -1,0 +1,14 @@
+{
+    "data": { "list_of_objects": {
+        "id": ["required", "uuid"],
+        "email": {"is": "admin2@gmail.com"},
+        "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+        "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    } },
+    "meta": { "nested_object": {
+        "totalCount": { "is": 2 },
+        "filteredCount": { "is": 1 },
+        "limit": { "is": 20 },
+        "offset": { "is": 0 }
+    } }
+}

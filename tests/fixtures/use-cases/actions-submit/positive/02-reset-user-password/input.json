@@ -1,0 +1,7 @@
+{
+    "type": "RESET_USER_PASSWORD",
+    "data": {
+        "confirmPassword": "password",
+        "password": "password"
+    }
+}

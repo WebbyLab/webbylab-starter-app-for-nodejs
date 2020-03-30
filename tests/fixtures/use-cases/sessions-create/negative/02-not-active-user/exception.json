@@ -1,0 +1,6 @@
+{
+    "code": "AUTHENTICATION_FAILED",
+    "fields": {
+        "status" : "NOT_ACTIVE_USER"
+    }
+}

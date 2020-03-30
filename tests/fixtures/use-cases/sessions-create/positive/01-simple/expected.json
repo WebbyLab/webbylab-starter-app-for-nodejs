@@ -1,0 +1,5 @@
+{
+    "data": ["required", { "nested_object": {
+        "jwt": ["required", "string"]
+    } }]
+}
