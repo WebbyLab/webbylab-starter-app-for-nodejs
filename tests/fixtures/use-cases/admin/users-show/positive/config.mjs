@@ -1,4 +1,4 @@
-import UsersShow from '../../../../../lib/use-cases/users/Show.mjs';
+import UsersShow from '../../../../../../lib/use-cases/admin/users/Show.mjs';
 
 export default {
     serviceClass : UsersShow,

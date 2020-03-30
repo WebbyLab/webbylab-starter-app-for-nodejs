@@ -13,8 +13,8 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/sessions-cre
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/sessions-create/negative`,
-    async ({ config: { serviceClass, before }, input, exception }, assert) => {
+    async ({ config: { serviceClass, before }, input, exception }) => {
         await before(tester.factory);
-        await tester.testUseCaseNegative({ serviceClass, input, exception }, assert);
+        await tester.testUseCaseNegative({ serviceClass, input, exception });
     }
 );

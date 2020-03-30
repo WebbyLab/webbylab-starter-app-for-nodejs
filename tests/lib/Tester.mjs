@@ -100,9 +100,9 @@ class Tester {
         });
     }
 
-    async testUseCasePositive({ serviceClass: Service, input = {}, expected = {} } = {}) {
+    async testUseCasePositive({ serviceClass: Service, input = {}, expected = {}, context = {} } = {}) {
         function serviceRunner() {
-            const service = new Service({ context: {} });
+            const service = new Service({ context });
 
             return service.run(input);
         }
@@ -110,9 +110,9 @@ class Tester {
         return this._testUseCasePositiveAbstract({ serviceRunner, expected }, this.testContext);
     }
 
-    async testUseCaseNegative({ serviceClass: Service, input = {}, exception = {} } = {}) {
+    async testUseCaseNegative({ serviceClass: Service, input = {}, exception = {}, context = {} } = {}) {
         function serviceRunner() {
-            const service = new Service({ context: {} });
+            const service = new Service({ context });
 
             return service.run(input);
         }
