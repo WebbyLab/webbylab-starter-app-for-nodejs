@@ -6,10 +6,10 @@ const tester = new Tester();
 const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-reset-password/positive`,
-    async ({ config: { serviceClass, before }, expected, input, fetchSideEffects, expectedSideEffects }) => {
+    async ({ config: { serviceClass, before }, expected, input, checkSideEffects }) => {
         await before(tester.factory);
         await tester.testUseCasePositive({ serviceClass, input, expected });
-        await tester.testSideEffects({ fetchSideEffects, expectedSideEffects });
+        await checkSideEffects();
     }
 );
 

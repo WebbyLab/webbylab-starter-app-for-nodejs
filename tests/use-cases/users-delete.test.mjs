@@ -6,12 +6,12 @@ const tester = new Tester();
 const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-delete/positive`,
-    async ({ config: { serviceClass, before }, expected, fetchSideEffects, expectedSideEffects }) => {
+    async ({ config: { serviceClass, before }, expected, checkSideEffects }) => {
         const userId = await before(tester.factory);
 
         await tester.testUseCasePositive({ serviceClass, input: { id: userId }, expected });
 
-        await tester.testSideEffects({ fetchSideEffects, expectedSideEffects, input: { userId } });
+        await checkSideEffects({ userId });
     }
 );
 

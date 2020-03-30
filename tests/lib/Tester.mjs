@@ -118,14 +118,6 @@ class Tester {
         return this._testUseCaseNegativeAbstract({ serviceRunner, exception }, this.testContext);
     }
 
-    async testSideEffects({ fetchSideEffects, expectedSideEffects = {}, input = {} } = {}) {
-        function serviceRunner() {
-            return fetchSideEffects(input);
-        }
-
-        return this._testUseCasePositiveAbstract({ serviceRunner, expected: expectedSideEffects }, this.testContext);
-    }
-
     async _testUseCasePositiveAbstract({ serviceRunner, expected = {} } = {}, assert) {
         const got = await serviceRunner();
         const validator = new LIVR.Validator(expected);
