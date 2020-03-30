@@ -15,7 +15,8 @@
     "test": "npm run test:lint && npm run test:audit && npm run test:mocha && npm run test:coverage",
     "create-admin": "node ./bin/add_admin.mjs",
     "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
-    "migration:db": "sequelize db:migrate --config lib/config.cjs --env db"
+    "migration:db": "sequelize db:migrate --config lib/config.cjs --env db",
+    "preinstall": "npx npm-force-resolutions"
   },
   "pre-commit": [
     "test:lint"
@@ -38,6 +39,7 @@
     "jsonwebtoken": "^8.4.0",
     "livr": "^2.3.0",
     "livr-extra-rules": "^1.1.0",
+    "minimist": "^1.2.5",
     "mysql2": "^2.1.0",
     "nodemailer": "^6.4.6",
     "nodemailer-sendmail-transport": "^1.0.2",
@@ -66,6 +68,9 @@
     "istanbul": "^1.1.0-alpha.1",
     "nodemon": "^2.0.2",
     "pre-commit": "^1.2.2"
+  },
+  "resolutions": {
+    "minimist": "^1.2.5"
   },
   "description": "NodeJS Backend Starterkit",
   "main": "app.mjs",
