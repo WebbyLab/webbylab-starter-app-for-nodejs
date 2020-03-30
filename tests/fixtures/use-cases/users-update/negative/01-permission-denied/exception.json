@@ -1,0 +1,6 @@
+{
+    "code": "PERMISSION_DENIED",
+    "fields": {
+        "token": "WRONG_TOKEN"
+    }
+}

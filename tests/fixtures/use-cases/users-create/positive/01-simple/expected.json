@@ -1,0 +1,12 @@
+{
+    "data": { "nested_object": {
+        "id": ["required", "uuid"],
+        "email": ["required", "email"],
+        "firstName": "string",
+        "secondName": "string",
+        "avatarUrl": "url",
+        "lang": {"is": "EN"},
+        "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+        "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    }}
+}

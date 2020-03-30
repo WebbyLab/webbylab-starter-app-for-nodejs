@@ -79,5 +79,6 @@
             "width"  : 820,
             "height" : 422
         }
-    }
+    },
+    "defaultLang": "EN"
 }
