@@ -19,8 +19,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/adm
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/admins-reset-password/negative`,
-    async ({ config: { serviceClass, before }, input, exception }, assert) => {
+    async ({ config: { serviceClass, before }, input, exception }) => {
         await before(tester.factory);
-        await tester.testUseCaseNegative({ serviceClass, input, exception }, assert);
+        await tester.testUseCaseNegative({ serviceClass, input, exception });
     }
 );

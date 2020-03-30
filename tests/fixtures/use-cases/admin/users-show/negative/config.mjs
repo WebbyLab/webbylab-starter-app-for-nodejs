@@ -1,12 +1,12 @@
-import UsersShow from '../../../../../lib/use-cases/users/Show.mjs';
+import UsersShow from '../../../../../../lib/use-cases/users/Show.mjs';
 
 export default {
     serviceClass : UsersShow,
     before       : async (factory) => {
         await factory.standardSetup();
-        const users = await factory.setupUsers();
-        const userId = users[0].id;
 
-        return userId;
+        const users = await factory.setupUsers();
+
+        return users[0].id;
     }
 };

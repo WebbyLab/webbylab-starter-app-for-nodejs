@@ -9,13 +9,13 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-show/p
     async ({ config: { serviceClass, before }, expected }) => {
         const userId = await before(tester.factory);
 
-        await tester.testUseCasePositive({ serviceClass, input: { id: userId }, expected });
+        await tester.testUseCasePositive({ serviceClass, input: { id: userId }, context: { userId }, expected });
     }
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-show/negative`,
-    async ({ config: { serviceClass, before }, input, exception }, assert) => {
+    async ({ config: { serviceClass, before }, input, exception }) => {
         await before(tester.factory);
-        await tester.testUseCaseNegative({ serviceClass, input, exception }, assert);
+        await tester.testUseCaseNegative({ serviceClass, input,  exception });
     }
 );
