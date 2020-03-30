@@ -4,9 +4,10 @@ services:
   - mysql:8.0.19
 
 variables:
-  MYSQL_DATABASE: test_db
+  MYSQL_DATABASE: starterkit-test
   MYSQL_ROOT_PASSWORD: mysql
-  TEST_DB_DATABASE: test_db
+  TEST_DB_USERNAME: root
+  TEST_DB_PASSWORD: mysql
   TEST_DB_HOST: mysql
   TEST_DB_PORT: 3306
   MODE: test
