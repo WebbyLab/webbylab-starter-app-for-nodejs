@@ -6,6 +6,7 @@ const tester = new Tester();
 const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/admins-delete/positive`,
+    'admin/admins-delete/positive',
     async ({ config: { serviceClass, before }, expected, checkSideEffects }) => {
         const adminId = await before(tester.factory);
 

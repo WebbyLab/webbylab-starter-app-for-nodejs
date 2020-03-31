@@ -6,6 +6,7 @@ const tester = new Tester();
 const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/actions-submit/positive`,
+    'actions-submit/positive',
     async ({ config: { serviceClass, before }, input, expected }) => {
         const actions = await before(tester.factory);
         const { type, data } = input;

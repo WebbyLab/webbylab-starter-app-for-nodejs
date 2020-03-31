@@ -65,7 +65,6 @@
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.19.0",
-    "istanbul": "^1.1.0-alpha.1",
     "nodemon": "^2.0.2",
     "pre-commit": "^1.2.2"
   },
