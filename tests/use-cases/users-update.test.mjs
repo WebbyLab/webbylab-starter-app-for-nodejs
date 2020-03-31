@@ -21,8 +21,8 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-update
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-update/negative`,
     'users-update/negative',
-    async ({ config: { serviceClass, before }, input, exception }) => {
+    async ({ config: { serviceClass, before }, input, exception, context }) => {
         await before(tester.factory);
-        await tester.testUseCaseNegative({ serviceClass, input, exception });
+        await tester.testUseCaseNegative({ serviceClass, input, exception, context });
     }
 );
