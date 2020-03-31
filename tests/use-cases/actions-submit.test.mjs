@@ -15,3 +15,12 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/actions-subm
         await tester.testUseCasePositive({ serviceClass, input: { ...data, id: actionId }, expected });
     }
 );
+
+tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/actions-submit/negative`,
+    'actions-submit/negative',
+    async ({ config: { serviceClass, before }, input, exception }) => {
+        await before(tester.factory);
+
+        await tester.testUseCaseNegative({ serviceClass, input, exception });
+    }
+);

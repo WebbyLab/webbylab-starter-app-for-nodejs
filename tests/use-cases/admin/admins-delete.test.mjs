@@ -15,3 +15,11 @@ tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/adm
         await checkSideEffects({ adminId });
     }
 );
+
+tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/admins-delete/negative`,
+    'admin/admins-delete/negative',
+    async ({ config: { serviceClass, before }, input, exception }) => {
+        await before(tester.factory);
+        await tester.testUseCaseNegative({ serviceClass, input, exception });
+    }
+);
