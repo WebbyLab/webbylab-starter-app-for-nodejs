@@ -1,0 +1,18 @@
+{
+    "data": { "list_of_objects": {
+        "id": ["required", "uuid"],
+        "email": ["required", "email"],
+        "firstName": "string",
+        "secondName": "string",
+        "avatarUrl": "url",
+        "lang": {"is": "EN"},
+        "createdAt": { "iso_date": {"min": "current", "format": "datetime"} },
+        "updatedAt": { "iso_date": {"min": "current", "format": "datetime"} }
+    } },
+    "meta": { "nested_object": {
+        "totalCount": { "is": 3 },
+        "filteredCount": { "is": 3 },
+        "limit": { "is": 20 },
+        "offset": { "is": 0 }
+    } }
+}

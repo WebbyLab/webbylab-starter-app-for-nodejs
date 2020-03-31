@@ -1,0 +1,8 @@
+{
+    "data": {
+        "email": "default1@gmail.com",
+        "password": "somePassword",
+        "confirmPassword": "somePassword",
+        "agreeWithTerms": true
+    }
+}

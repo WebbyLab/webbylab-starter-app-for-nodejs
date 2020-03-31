@@ -1,0 +1,6 @@
+{
+    "code": "NOT_UNIQUE",
+    "fields": {
+        "email": "NOT_UNIQUE"
+    }
+}
