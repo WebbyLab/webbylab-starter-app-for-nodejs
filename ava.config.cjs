@@ -7,6 +7,6 @@ module.exports = {
     serial  : true,
     verbose : true,
     files   : [
-        'tests/use-cases/**'
+        'tests/**/*.test.mjs'
     ]
 };

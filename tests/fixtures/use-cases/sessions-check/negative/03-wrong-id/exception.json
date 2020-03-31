@@ -1,6 +1,6 @@
 {
     "code": "WRONG_TOKEN",
     "fields": {
-        "token" : "USER_NOT_VALID"
+        "token" : "WRONG_ID"
     }
 }

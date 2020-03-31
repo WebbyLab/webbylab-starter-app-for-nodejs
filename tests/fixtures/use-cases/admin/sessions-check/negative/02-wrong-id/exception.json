@@ -1,6 +1,6 @@
 {
     "code": "WRONG_TOKEN",
     "fields": {
-        "token": "WRONG_TOKEN"
+        "token" : "WRONG_ID"
     }
 }

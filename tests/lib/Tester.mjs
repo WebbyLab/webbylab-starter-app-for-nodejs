@@ -57,7 +57,7 @@ class Tester {
         return data;
     }
 
-    setupTestsWithTransactions(rootDir, cb) {
+    setupTestsWithTransactions(rootDir, title, cb) {
         const dirs = this.readTestDirs(rootDir);
 
         let rootData = {};
@@ -68,7 +68,7 @@ class Tester {
 
         for (const dir of dirs) {
             // eslint-disable-next-line no-loop-func
-            test.serial(`${rootDir} ${dir}`, async (t) => {
+            test.serial(`${title} ${dir}`, async (t) => {
                 try {
                     const data = await this.readTestData(rootDir, dir);
 

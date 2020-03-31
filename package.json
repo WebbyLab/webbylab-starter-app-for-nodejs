@@ -48,8 +48,7 @@
     "rename-keys": "^2.0.1",
     "sequelize": "^5.21.5",
     "sequelize-cli": "^5.5.1",
-    "uuid": "^7.0.2",
-    "uuid-validate": "0.0.3"
+    "uuid": "^7.0.2"
   },
   "devDependencies": {
     "ava": "^3.5.1",
@@ -65,7 +64,6 @@
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.19.0",
-    "istanbul": "^1.1.0-alpha.1",
     "nodemon": "^2.0.2",
     "pre-commit": "^1.2.2"
   },
