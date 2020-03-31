@@ -9,7 +9,7 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-delete
     async ({ config: { serviceClass, before }, expected, checkSideEffects }) => {
         const userId = await before(tester.factory);
 
-        await tester.testUseCasePositive({ serviceClass, input: { id: userId }, expected });
+        await tester.testUseCasePositive({ serviceClass, input: { id: userId }, context: { userId }, expected });
 
         await checkSideEffects({ userId });
     }

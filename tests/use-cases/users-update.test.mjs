@@ -9,7 +9,12 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-update
     async ({ config: { serviceClass, before }, expected, input }) => {
         const userId = await before(tester.factory);
 
-        await tester.testUseCasePositive({ serviceClass, input: { ...input, id: userId }, expected });
+        await tester.testUseCasePositive({
+            serviceClass,
+            input   : { ...input, id: userId },
+            context : { userId },
+            expected
+        });
     }
 );
 
