@@ -10,9 +10,6 @@ tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/adm
     async ({ config: { serviceClass, before }, expected, checkSideEffects }) => {
         const adminId = await before(tester.factory);
 
-        console.log(adminId);
-
-
         await tester.testUseCasePositive({ serviceClass, input: { id: adminId }, expected });
 
         await checkSideEffects({ adminId });

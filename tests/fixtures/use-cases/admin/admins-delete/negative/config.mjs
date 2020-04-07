@@ -4,9 +4,8 @@ export default {
     serviceClass : AdminAdminsDelete,
     before       : async (factory) => {
         await factory.standardSetup();
+        const admins = await factory.setupAdmins();
 
-        const users = await factory.setupAdmins();
-
-        return users[0].id;
+        return admins[0].id;
     }
 };
