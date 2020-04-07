@@ -8,7 +8,7 @@
     "nodemon:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "start": "MODE=application NODE_ENV=production node app.mjs",
     "test:lint": "eslint lib tests app.mjs --ext mjs",
-    "test:ava": "cross-env MODE=test ava tests/**/*.test.mjs",
+    "test:ava": "cross-env MODE=test ava",
     "test:api": "cross-env MODE=test ava tests/api/**/*.test.mjs",
     "test:use-cases": "cross-env MODE=test ava tests/use-cases/**/*.test.mjs",
     "test:coverage": "c8 npm run test:ava",

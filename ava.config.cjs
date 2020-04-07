@@ -5,8 +5,8 @@ module.exports = {
         '--experimental-json-modules'
     ],
     serial  : true,
-    verbose : true
-    // files   : [
-    //     'tests/**/*.test.mjs'
-    // ]
+    verbose : true,
+    files   : [
+        'tests/**/*.test.mjs'
+    ]
 };
