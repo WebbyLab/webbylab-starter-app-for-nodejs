@@ -6,7 +6,6 @@ import extraRules    from 'livr-extra-rules';
 import initAllModels from '../../lib/domain-model/initModels.mjs';
 import UseCaseBase   from '../../lib/use-cases/Base.mjs';
 import appConfig     from '../../lib/config.cjs';
-import { Exception } from '../../packages.mjs';
 
 import TestFactory   from './TestFactory.mjs';
 
@@ -100,27 +99,15 @@ class Tester {
         });
     }
 
-    async testUseCasePositive({ serviceClass: Service, input = {}, expected = {}, context = {} } = {}) {
-        function serviceRunner() {
-            const service = new Service({ context });
-
-            return service.run(input);
-        }
-
-        return this._testUseCasePositiveAbstract({ serviceRunner, expected }, this.testContext);
+    async testUseCasePositive() {
+        throw new Error('testUseCasePositive is not implemented');
     }
 
-    async testUseCaseNegative({ serviceClass: Service, input = {}, exception = {}, context = {} } = {}) {
-        function serviceRunner() {
-            const service = new Service({ context });
-
-            return service.run(input);
-        }
-
-        return this._testUseCaseNegativeAbstract({ serviceRunner, exception }, this.testContext);
+    async testUseCaseNegative() {
+        throw new Error('testUseCaseNegative is not implemented');
     }
 
-    async _testUseCasePositiveAbstract({ serviceRunner, expected = {} } = {}, assert) {
+    async _testUseCasePositiveAbstract({ serviceRunner, expected = {} } = {}, assert = this.testContext) {
         const got = await serviceRunner();
         const validator = new LIVR.Validator(expected);
 
@@ -139,19 +126,15 @@ class Tester {
         }
 
         // For strict equality
-        delete got.status; // TODO: remove this dirty hack
         assert.deepEqual(got, validated);
 
         return got;
     }
 
-    async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert) {
-        const error = await assert.throwsAsync(
-            serviceRunner,
-            { instanceOf: Exception }
-        );
+    async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert = this.testContext) {
+        const error = await serviceRunner();
 
-        assert.deepEqual(error, new Exception(exception));
+        assert.deepEqual(error, exception);
     }
 }
 
