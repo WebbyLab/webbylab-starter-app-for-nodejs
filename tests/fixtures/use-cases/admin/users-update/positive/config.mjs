@@ -5,8 +5,11 @@ export default {
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();
+        const admins = await factory.setupAdmins();
+
+        const adminId = admins[0].id;
         const userId = users[0].id;
 
-        return userId;
+        return { adminId, userId };
     }
 };

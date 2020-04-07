@@ -4,9 +4,12 @@ export default {
     serviceClass : AdminUsersUpdate,
     before       : async (factory) => {
         await factory.standardSetup();
-
         const users = await factory.setupUsers();
+        const admins = await factory.setupAdmins();
 
-        return users[0].id;
+        const adminId = admins[0].id;
+        const userId = users[0].id;
+
+        return { adminId, userId };
     }
 };
