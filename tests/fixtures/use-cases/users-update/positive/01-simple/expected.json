@@ -1,7 +1,7 @@
 {
     "data": { "nested_object": {
         "id": ["required", "uuid"],
-        "email": {"is": "default1@gmail.com"},
+        "email": {"is": "default2@gmail.com"},
         "firstName": {"is": "New First Name"},
         "secondName": {"is": "New Second Name"},
         "avatarUrl": ["required", {"nested_object": {
