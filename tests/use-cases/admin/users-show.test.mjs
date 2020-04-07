@@ -8,7 +8,7 @@ const dirname = getDirName(import.meta.url);
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/users-show/positive`,
     'admin/users-show/positive',
     async ({ config: { serviceClass, before }, expected }) => {
-        const userId = await before(tester.factory);
+        const { userId } = await before(tester.factory);
 
         await tester.testUseCasePositive({ serviceClass, input: { id: userId },  expected });
     }
