@@ -1,4 +1,4 @@
-import Action     from '../../../../../../lib/domain-model/Action.mjs';
+import Action     from '../../../../../../lib/domain-model/StoredTriggerableAction.mjs';
 import User       from '../../../../../../lib/domain-model/User.mjs';
 
 export default async function checkSideEffects({ userId }) {

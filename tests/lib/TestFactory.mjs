@@ -1,6 +1,6 @@
-import Action from '../../lib/domain-model/StoredTriggerableAction.mjs';
-import Admin  from '../../lib/domain-model/Admin.mjs';
-import User   from '../../lib/domain-model/User.mjs';
+import StoredTriggerableAction from '../../lib/domain-model/StoredTriggerableAction.mjs';
+import Admin                   from '../../lib/domain-model/Admin.mjs';
+import User                    from '../../lib/domain-model/User.mjs';
 
 class TestFactory {
     constructor() {
@@ -82,7 +82,7 @@ class TestFactory {
                 data : { adminId }
             }
         ];
-        const savedActions = await Action.bulkCreate(actions);
+        const savedActions = await StoredTriggerableAction.bulkCreate(actions);
 
         return savedActions;
     }

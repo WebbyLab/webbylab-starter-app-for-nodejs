@@ -1,4 +1,4 @@
-import Action     from '../../../../../lib/domain-model/Action.mjs';
+import Action     from '../../../../../lib/domain-model/StoredTriggerableAction.mjs';
 
 export default async function checkSideEffects() {
     const actions = await Action.findAll({ where : {
