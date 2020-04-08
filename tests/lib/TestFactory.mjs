@@ -1,4 +1,4 @@
-import Action from '../../lib/domain-model/Action.mjs';
+import Action from '../../lib/domain-model/StoredTriggerableAction.mjs';
 import Admin  from '../../lib/domain-model/Admin.mjs';
 import User   from '../../lib/domain-model/User.mjs';
 
