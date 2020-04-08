@@ -1,6 +1,6 @@
 {
-    "code": "WRONG_ID",
+    "code": "USER_NOT_FOUND",
     "fields": {
-        "id": "WRONG_ID"
+        "id": "USER_NOT_FOUND"
     }
 }
