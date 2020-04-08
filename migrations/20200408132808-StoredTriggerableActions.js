@@ -1,8 +1,7 @@
 
-
 module.exports = {
     up : (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Actions', {
+        return queryInterface.createTable('StoredTriggerableActions', {
             id        : { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
             type      : { type: Sequelize.ENUM('ACTIVATE_USER', 'RESET_USER_PASSWORD', 'RESET_ADMIN_PASSWORD'), allowNull: false },
             data      : { type: Sequelize.JSON, allowNull: false },
@@ -12,6 +11,6 @@ module.exports = {
     },
 
     down : (queryInterface) => {
-        return queryInterface.dropTable('Actions');
+        return queryInterface.dropTable('StoredTriggerableActions');
     }
 };
