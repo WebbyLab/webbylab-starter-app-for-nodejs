@@ -21,8 +21,6 @@ class Tester {
 
         UseCaseBase.setSequelizeInstanse(sequelize); // TODO find a better way
 
-        global.sequelize = sequelize; // TODO find a better way
-
         this.sequelize = sequelize;
         this.factory = new TestFactory();
     }
@@ -81,8 +79,7 @@ class Tester {
 
                             throw error;
                         } finally {
-                            global.withTestTransaction = null;
-                            // global.testTransaction = null;
+                            global.testTransaction = null;
                             await t1.rollback();
                         }
                     });
