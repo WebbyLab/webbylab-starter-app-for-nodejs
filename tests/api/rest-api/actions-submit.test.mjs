@@ -15,29 +15,26 @@ function requestBuilder(input, actionId) {
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/actions-submit/positive`,
     'actions-submit/positive',
-    async ({ config: { before }, input, expected }) => {
-        const actions = await before(tester.factory);
-        const { type, data } = input;
-        const actionId = actions[type];
+    async ({ config: { before }, input, expected, checkSideEffects }) => {
+        const { actionId, ...other } = await before(tester.factory);
 
         await tester.testUseCasePositive({
             requestBuilder : (...args) => requestBuilder(...args, actionId),
-            input          : { data },
+            input,
             expected
         });
+        await checkSideEffects({ actionId, ...other });
     }
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/actions-submit/negative`,
     'actions-submit/negative',
     async ({ config: { before }, input, exception }) => {
-        await before(tester.factory);
-
-        const { id, ...data } = input;
+        const { actionId } = await before(tester.factory);
 
         await tester.testUseCaseNegative({
-            requestBuilder : (...args) => requestBuilder(...args, id),
-            input          : data,
+            requestBuilder : (...args) => requestBuilder(...args, actionId),
+            input,
             exception
         });
     }

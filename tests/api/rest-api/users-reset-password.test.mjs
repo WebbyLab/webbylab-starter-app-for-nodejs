@@ -18,7 +18,7 @@ tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/users-res
     async ({ config: { before }, expected, input, checkSideEffects }) => {
         await before(tester.factory);
         await tester.testUseCasePositive({ requestBuilder, input, expected });
-        await checkSideEffects();
+        await checkSideEffects({ email: input.data.email });
     }
 );
 

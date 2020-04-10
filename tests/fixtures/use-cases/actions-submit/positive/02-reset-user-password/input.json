@@ -1,4 +1,6 @@
 {
-    "confirmPassword": "password",
-    "password": "password"
+    "data" : {
+        "confirmPassword": "password",
+        "password": "password"
+    }
 }
