@@ -2,8 +2,8 @@ import Action     from '../../../../../../lib/domain-model/StoredTriggerableActi
 
 export default async function checkSideEffects({ adminId }) {
     const actions = await Action.findAll({ where : {
-        data : { '"adminId"': adminId },
-        type : 'RESET_ADMIN_PASSWORD'
+        payload : { '"adminId"': adminId },
+        type    : 'RESET_ADMIN_PASSWORD'
     } });
 
     if (!actions.length) {

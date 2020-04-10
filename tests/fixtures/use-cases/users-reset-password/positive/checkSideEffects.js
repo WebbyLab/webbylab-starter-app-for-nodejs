@@ -1,9 +1,12 @@
-import Action     from '../../../../../lib/domain-model/StoredTriggerableAction.mjs';
+import Action from '../../../../../lib/domain-model/StoredTriggerableAction.mjs';
+import User   from '../../../../../lib/domain-model/User.mjs';
 
-export default async function checkSideEffects() {
+export default async function checkSideEffects({ email }) {
+    const user = await User.findOne({ where: { email } });
+
     const actions = await Action.findAll({ where : {
-        data : { '"email"': 'default2@gmail.com' },
-        type : 'RESET_USER_PASSWORD'
+        payload : { '"userId"': user.id },
+        type    : 'RESET_USER_PASSWORD'
     } });
 
     if (!actions.length) {

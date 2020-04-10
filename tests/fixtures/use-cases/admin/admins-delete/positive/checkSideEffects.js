@@ -8,7 +8,7 @@ export default async function checkSideEffects({ adminId }) {
         throw new Error('Admin hasn\'t been deleted from database');
     }
 
-    const actions = await Action.findAll({ where: { data: { '"adminId"': adminId } } });
+    const actions = await Action.findAll({ where: { payload: { '"adminId"': adminId } } });
 
     if (actions.length > 0) {
         throw new Error('All related actions should be deleted on Admin Delete');
