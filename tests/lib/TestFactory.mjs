@@ -70,16 +70,16 @@ class TestFactory {
     async setupActions(userId, adminId) {
         const actions = [
             {
-                type : 'ACTIVATE_USER',
-                data : { userId }
+                type    : 'ACTIVATE_USER',
+                payload : { userId }
             },
             {
-                type : 'RESET_USER_PASSWORD',
-                data : { userId }
+                type    : 'RESET_USER_PASSWORD',
+                payload : { userId }
             },
             {
-                type : 'RESET_ADMIN_PASSWORD',
-                data : { adminId }
+                type    : 'RESET_ADMIN_PASSWORD',
+                payload : { adminId }
             }
         ];
         const savedActions = await StoredTriggerableAction.bulkCreate(actions);
