@@ -8,7 +8,7 @@ export default async function checkSideEffects({ userId }) {
         throw new Error('User hasn\'t been deleted from database');
     }
 
-    const actions = await Action.findAll({ where: { data: { '"userId"': userId } } });
+    const actions = await Action.findAll({ where: { payload: { '"userId"': userId } } });
 
     if (actions.length > 0) {
         throw new Error('All related actions should be deleted on User Delete');
