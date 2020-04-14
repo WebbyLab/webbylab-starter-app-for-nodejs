@@ -1,7 +1,0 @@
-{
-    "type": "RESET_ADMIN_PASSWORD",
-    "data": {
-        "confirmPassword": "password",
-        "password": "password"
-    }
-}

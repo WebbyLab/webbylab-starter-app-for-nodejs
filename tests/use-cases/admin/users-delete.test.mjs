@@ -1,5 +1,5 @@
 import { getDirName } from '../../../lib/utils/index.mjs';
-import Tester         from '../../lib/Tester.mjs';
+import Tester         from '../Tester.mjs';
 
 const tester = new Tester();
 
@@ -8,7 +8,7 @@ const dirname = getDirName(import.meta.url);
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/admin/users-delete/positive`,
     'admin/users-delete/positive',
     async ({ config: { serviceClass, before }, expected, checkSideEffects }) => {
-        const userId = await before(tester.factory);
+        const { userId } = await before(tester.factory);
 
         await tester.testUseCasePositive({ serviceClass, input: { id: userId }, expected });
 

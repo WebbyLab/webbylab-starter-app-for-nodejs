@@ -5,5 +5,8 @@ export default {
     before       : async (factory) => {
         await factory.standardSetup();
         await factory.setupUsers();
+        const admins = await factory.setupAdmins();
+
+        return admins[0].id;
     }
 };

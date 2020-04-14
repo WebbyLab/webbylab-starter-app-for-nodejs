@@ -4,6 +4,8 @@ export default {
     serviceClass : AdmnisList,
     before       : async (factory) => {
         await factory.standardSetup();
-        await factory.setupAdmins();
+        const admins = await factory.setupAdmins();
+
+        return admins[0].id;
     }
 };

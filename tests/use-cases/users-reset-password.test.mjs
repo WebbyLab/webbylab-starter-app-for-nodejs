@@ -1,5 +1,5 @@
 import { getDirName } from '../../lib/utils/index.mjs';
-import Tester         from '../lib/Tester.mjs';
+import Tester         from './Tester.mjs';
 
 const tester = new Tester();
 
@@ -10,7 +10,7 @@ tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/users-reset-
     async ({ config: { serviceClass, before }, expected, input, checkSideEffects }) => {
         await before(tester.factory);
         await tester.testUseCasePositive({ serviceClass, input, expected });
-        await checkSideEffects();
+        await checkSideEffects({ email: input.data.email });
     }
 );
 

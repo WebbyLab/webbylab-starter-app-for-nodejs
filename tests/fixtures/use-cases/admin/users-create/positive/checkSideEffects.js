@@ -1,16 +1,16 @@
-import Action     from '../../../../../../lib/domain-model/Action.mjs';
+import Action     from '../../../../../../lib/domain-model/StoredTriggerableAction.mjs';
 import User       from '../../../../../../lib/domain-model/User.mjs';
 
 export default async function checkSideEffects({ userId }) {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId, { allowPending: 1 });
 
     if (user.status !== 'PENDING') {
         throw new Error('User status should be "PENDING"');
     }
 
     const actions = await Action.findAll({ where : {
-        data : { '"userId"': userId },
-        type : 'ACTIVATE_USER'
+        payload : { '"userId"': userId },
+        type    : 'ACTIVATE_USER'
     } });
 
     if (!actions.length) {

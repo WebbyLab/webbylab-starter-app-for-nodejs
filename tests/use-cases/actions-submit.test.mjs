@@ -1,5 +1,5 @@
 import { getDirName } from '../../lib/utils/index.mjs';
-import Tester         from '../lib/Tester.mjs';
+import Tester         from './Tester.mjs';
 
 const tester = new Tester();
 
@@ -7,20 +7,19 @@ const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/actions-submit/positive`,
     'actions-submit/positive',
-    async ({ config: { serviceClass, before }, input, expected }) => {
-        const actions = await before(tester.factory);
-        const { type, data } = input;
-        const actionId = actions[type];
+    async ({ config: { serviceClass, before }, input, expected, checkSideEffects }) => {
+        const { actionId, ...other } = await before(tester.factory);
 
-        await tester.testUseCasePositive({ serviceClass, input: { ...data, id: actionId }, expected });
+        await tester.testUseCasePositive({ serviceClass, input: { ...input, id: actionId }, expected });
+        await checkSideEffects({ actionId, ...other });
     }
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../fixtures/use-cases/actions-submit/negative`,
     'actions-submit/negative',
     async ({ config: { serviceClass, before }, input, exception }) => {
-        await before(tester.factory);
+        const { actionId } = await before(tester.factory);
 
-        await tester.testUseCaseNegative({ serviceClass, input, exception });
+        await tester.testUseCaseNegative({ serviceClass, input: { id: actionId, ...input }, exception });
     }
 );

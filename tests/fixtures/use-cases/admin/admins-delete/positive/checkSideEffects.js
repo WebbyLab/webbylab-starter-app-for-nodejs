@@ -1,4 +1,4 @@
-import Action from '../../../../../../lib/domain-model/Action.mjs';
+import Action from '../../../../../../lib/domain-model/StoredTriggerableAction.mjs';
 import Admin  from '../../../../../../lib/domain-model/Admin.mjs';
 
 export default async function checkSideEffects({ adminId }) {
@@ -8,7 +8,7 @@ export default async function checkSideEffects({ adminId }) {
         throw new Error('Admin hasn\'t been deleted from database');
     }
 
-    const actions = await Action.findAll({ where: { data: { '"adminId"': adminId } } });
+    const actions = await Action.findAll({ where: { payload: { '"adminId"': adminId } } });
 
     if (actions.length > 0) {
         throw new Error('All related actions should be deleted on Admin Delete');

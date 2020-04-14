@@ -4,6 +4,8 @@ export default {
     serviceClass : UsersList,
     before       : async (factory) => {
         await factory.standardSetup();
-        await factory.setupUsers();
+        const users = await factory.setupUsers();
+
+        return users[1].id;
     }
 };

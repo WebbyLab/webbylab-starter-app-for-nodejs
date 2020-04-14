@@ -1,6 +1,6 @@
-import Action from '../../lib/domain-model/Action.mjs';
-import Admin  from '../../lib/domain-model/Admin.mjs';
-import User   from '../../lib/domain-model/User.mjs';
+import StoredTriggerableAction from '../../lib/domain-model/StoredTriggerableAction.mjs';
+import Admin                   from '../../lib/domain-model/Admin.mjs';
+import User                    from '../../lib/domain-model/User.mjs';
 
 class TestFactory {
     constructor() {
@@ -70,19 +70,19 @@ class TestFactory {
     async setupActions(userId, adminId) {
         const actions = [
             {
-                type : 'ACTIVATE_USER',
-                data : { userId }
+                type    : 'ACTIVATE_USER',
+                payload : { userId }
             },
             {
-                type : 'RESET_USER_PASSWORD',
-                data : { userId }
+                type    : 'RESET_USER_PASSWORD',
+                payload : { userId }
             },
             {
-                type : 'RESET_ADMIN_PASSWORD',
-                data : { adminId }
+                type    : 'RESET_ADMIN_PASSWORD',
+                payload : { adminId }
             }
         ];
-        const savedActions = await Action.bulkCreate(actions);
+        const savedActions = await StoredTriggerableAction.bulkCreate(actions);
 
         return savedActions;
     }
