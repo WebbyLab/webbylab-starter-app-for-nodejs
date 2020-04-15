@@ -1,4 +1,3 @@
-/* eslint-disable import/imports-first */
 import path             from 'path';
 import { getDirName }   from './lib/utils/index.mjs';
 import Logger           from './lib/utils/Logger.mjs';
