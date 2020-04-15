@@ -1,10 +1,10 @@
 import path             from 'path';
 import { getDirName }   from './lib/utils/index.mjs';
-import Logger           from './lib/utils/Logger.mjs';
 import * as Chista      from './lib/chista.mjs';
 import * as API         from './lib/api/index.mjs';
 import * as RestAPI     from './lib/api/rest-api/app.mjs';
 import * as DomainModel from './lib/domain-model/index.mjs';
+import Logger           from './lib/infrastructure/Logger.mjs';
 import EmailSender      from './lib/infrastructure/notificator/Mail.mjs';
 import UseCaseBase      from './lib/use-cases/Base.mjs';
 import config           from './lib/config.cjs';
