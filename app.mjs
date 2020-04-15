@@ -1,3 +1,4 @@
+// Init Controllers Layer
 import {
     stop as stopRestAPI
 }                  from './lib/api/rest-api/app.mjs';
@@ -11,14 +12,14 @@ import config      from './lib/config.cjs';
 
 logger.info(`[App] Init Mode: ${process.env.MODE}`);
 
+// Init Domain Model Layer
 const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
-
 const { sequelize } = initModels(config[dbMode]);
 
-// TODO: change
-UseCaseBase.setSequelizeInstanse(sequelize);
 setDomainModelLogger(logger);
 
+// Init Use Cases Layer
+UseCaseBase.setSequelizeInstanse(sequelize);
 
 process.on('SIGTERM', async () => {
     logger.info('[App] SIGTERM signal catched');
