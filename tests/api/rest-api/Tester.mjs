@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 
 import '../../../app.mjs';
-import '../../../lib/api/rest-api/app.mjs';
 
 import AbstractTester from '../../lib/AbstractTester.mjs';
 
