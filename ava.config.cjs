@@ -5,8 +5,13 @@ module.exports = {
         '--experimental-json-modules'
     ],
     serial  : true,
-    verbose : true,
+    verbose : false,
     files   : [
-        'tests/**/*.test.mjs'
-    ]
+        'tests/api/**/*.test.mjs',
+        'tests/use-cases/**/*.test.mjs'
+    ],
+    concurrency          : 1,
+    environmentVariables : {
+        MODE : 'test'
+    }
 };
