@@ -11,7 +11,7 @@
     "test:ava": "ava",
     "test:coverage": "c8 npm run test:ava",
     "test:audit": "npm audit",
-    "test": "npm run test:lint && npm run test:audit && npm run test:ava && npm run test:coverage",
+    "test": "npm run test:lint && npm run test:audit && npm run test:coverage",
     "create:admin": "node ./bin/add_admin.mjs",
     "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
     "migration:db": "sequelize db:migrate --config lib/config.cjs --env db"
