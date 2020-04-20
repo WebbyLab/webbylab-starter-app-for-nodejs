@@ -30,8 +30,9 @@ Chista.setLogger(logger);
 
 // Init Controllers Layer (API)
 API.setLogger(logger);
+
 RestAPI.start({
-    appPort : config.appPort
+    appPort : (process.env.MODE === 'test' ? 0 : config.appPort)
 });
 
 // Init Domain Model Layer

@@ -61,6 +61,7 @@
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.19.0",
+    "fs-ext": "^2.0.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
     "pino-pretty": "^3.6.1",
