@@ -21,7 +21,7 @@ const LOCK_FILE = '.ava-tests-mutex.lock';
 // eslint-disable-next-line func-style
 const lazyImport = (path) => import(path);
 
-class Tester {
+class Base {
     constructor() {
         const { sequelize } = initAllModels(appConfig['test-db']);
 
@@ -156,4 +156,4 @@ class Tester {
     }
 }
 
-export default Tester;
+export default Base;

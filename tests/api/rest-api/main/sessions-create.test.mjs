@@ -1,5 +1,5 @@
 import { getDirName } from '../../../../lib/utils/index.mjs';
-import Tester         from '../Tester.mjs';
+import Tester         from '../../../lib/RestAPITester.mjs';
 
 const tester = new Tester();
 

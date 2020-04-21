@@ -1,7 +1,7 @@
-import { Exception }  from '../../packages.mjs';
-import AbstractTester from '../lib/AbstractTester.mjs';
+import { Exception } from '../../packages.mjs';
+import Base          from './Base.mjs';
 
-class UseCaseTester extends AbstractTester {
+class UseCaseTester extends Base {
     async testUseCasePositive({ serviceClass: Service, input = {}, expected = {}, context = {} } = {}) {
         function serviceRunner() {
             const service = new Service({ context });

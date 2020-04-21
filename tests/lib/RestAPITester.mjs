@@ -1,12 +1,10 @@
 import fetch from 'node-fetch';
+import '../../app.mjs';
+import '../../lib/api/rest-api/app.mjs';
 
+import Base from './Base.mjs';
 
-import '../../../app.mjs';
-import '../../../lib/api/rest-api/app.mjs';
-
-import AbstractTester from '../../lib/AbstractTester.mjs';
-
-class RestAPITester extends AbstractTester {
+class RestAPITester extends Base {
     constructor(...params) {
         super(...params);
     }
