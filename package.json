@@ -11,7 +11,7 @@
     "test:ava": "ava",
     "test:coverage": "c8 npm run test:ava",
     "test:audit": "npm audit",
-    "test": "npm run test:lint && npm run test:audit && npm run test:ava && npm run test:coverage",
+    "test": "npm run test:lint && npm run test:audit && npm run test:coverage",
     "create:admin": "node ./bin/add_admin.mjs",
     "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
     "migration:db": "sequelize db:migrate --config lib/config.cjs --env db"
@@ -61,6 +61,7 @@
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.19.0",
+    "fs-ext": "^2.0.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
     "pino-pretty": "^3.6.1",
