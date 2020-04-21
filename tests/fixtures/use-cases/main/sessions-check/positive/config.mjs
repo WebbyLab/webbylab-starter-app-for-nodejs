@@ -1,6 +1,5 @@
-import jwt           from 'jsonwebtoken';
-import config        from '../../../../../../lib/config.cjs';
-import SessionsCheck from '../../../../../../lib/use-cases/main/sessions/Check.mjs';
+import { generateToken } from '../../../../../../lib/use-cases/utils/jwtUtils.mjs';
+import SessionsCheck     from '../../../../../../lib/use-cases/main/sessions/Check.mjs';
 
 export default {
     useCaseClass : SessionsCheck,
@@ -10,7 +9,7 @@ export default {
         const tokens = {};
 
         for (const user of users) {
-            tokens[user.email] = jwt.sign({ id: user.id }, config.secret);
+            tokens[user.email] = generateToken({ id: user.id });
         }
 
         return tokens;
