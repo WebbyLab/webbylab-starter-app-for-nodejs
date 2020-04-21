@@ -3,7 +3,7 @@ import config             from '../../../../../../lib/config.cjs';
 import AdminSessionsCheck from '../../../../../../lib/use-cases/admin/sessions/Check.mjs';
 
 export default {
-    serviceClass : AdminSessionsCheck,
+    useCaseClass : AdminSessionsCheck,
     before       : async (factory) => {
         await factory.standardSetup();
         const admins = await factory.setupAdmins();

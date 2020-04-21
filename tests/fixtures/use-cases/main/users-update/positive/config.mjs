@@ -1,7 +1,7 @@
 import UsersUpdate from '../../../../../../lib/use-cases/main/users/Update.mjs';
 
 export default {
-    serviceClass : UsersUpdate,
+    useCaseClass : UsersUpdate,
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();

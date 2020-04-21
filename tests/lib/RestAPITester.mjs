@@ -12,7 +12,7 @@ class RestAPITester extends Base {
     async testUseCasePositive({ requestBuilder, input = {}, expected = {} } = {}) {
         const apiPrefix = this._getApiPrefix();
 
-        async function serviceRunner() {
+        async function useCaseRunner() {
             const request = requestBuilder(input);
             const response = await fetch(`${apiPrefix}${request.url}`, {
                 method  : request.method,
@@ -27,7 +27,7 @@ class RestAPITester extends Base {
         }
 
         return this._testUseCasePositiveAbstract({
-            serviceRunner,
+            useCaseRunner,
             expected : {
                 ...expected,
                 status : { is: 1 }
@@ -38,7 +38,7 @@ class RestAPITester extends Base {
     async testUseCaseNegative({ requestBuilder, input = {}, exception = {} } = {}) {
         const apiPrefix = this._getApiPrefix();
 
-        async function serviceRunner() {
+        async function useCaseRunner() {
             const request = requestBuilder(input);
             const response = await fetch(`${apiPrefix}${request.url}`, {
                 method  : request.method,
@@ -53,7 +53,7 @@ class RestAPITester extends Base {
         }
 
         return this._testUseCaseNegativeAbstract({
-            serviceRunner,
+            useCaseRunner,
             exception : {
                 status : 0,
                 error  : exception
@@ -61,8 +61,8 @@ class RestAPITester extends Base {
         });
     }
 
-    async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert = this.testContext) {
-        const error = await serviceRunner();
+    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
+        const error = await useCaseRunner();
 
         assert.deepEqual(error, exception);
     }

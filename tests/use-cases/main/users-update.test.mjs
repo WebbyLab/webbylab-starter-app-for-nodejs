@@ -7,11 +7,11 @@ const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/users-update/positive`,
     'users-update/positive',
-    async ({ config: { serviceClass, before }, expected, input }) => {
+    async ({ config: { useCaseClass, before }, expected, input }) => {
         const userId = await before(tester.factory);
 
         await tester.testUseCasePositive({
-            serviceClass,
+            useCaseClass,
             input   : { ...input, id: userId },
             context : { userId },
             expected
@@ -21,8 +21,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/user
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/users-update/negative`,
     'users-update/negative',
-    async ({ config: { serviceClass, before }, input, exception, context }) => {
+    async ({ config: { useCaseClass, before }, input, exception, context }) => {
         await before(tester.factory);
-        await tester.testUseCaseNegative({ serviceClass, input, exception, context });
+        await tester.testUseCaseNegative({ useCaseClass, input, exception, context });
     }
 );

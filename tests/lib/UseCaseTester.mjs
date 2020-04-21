@@ -2,29 +2,29 @@ import { Exception } from '../../packages.mjs';
 import Base          from './Base.mjs';
 
 class UseCaseTester extends Base {
-    async testUseCasePositive({ serviceClass: Service, input = {}, expected = {}, context = {} } = {}) {
-        function serviceRunner() {
-            const service = new Service({ context });
+    async testUseCasePositive({ useCaseClass: UseCase, input = {}, expected = {}, context = {} } = {}) {
+        function useCaseRunner() {
+            const useCase = new UseCase({ context });
 
-            return service.run(input);
+            return useCase.run(input);
         }
 
-        return this._testUseCasePositiveAbstract({ serviceRunner, expected });
+        return this._testUseCasePositiveAbstract({ useCaseRunner, expected });
     }
 
-    async testUseCaseNegative({ serviceClass: Service, input = {}, exception = {}, context = {} } = {}) {
-        function serviceRunner() {
-            const service = new Service({ context });
+    async testUseCaseNegative({ useCaseClass: UseCase, input = {}, exception = {}, context = {} } = {}) {
+        function useCaseRunner() {
+            const useCase = new UseCase({ context });
 
-            return service.run(input);
+            return useCase.run(input);
         }
 
-        return this._testUseCaseNegativeAbstract({ serviceRunner, exception });
+        return this._testUseCaseNegativeAbstract({ useCaseRunner, exception });
     }
 
-    async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert = this.testContext) {
+    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
         const error = await assert.throwsAsync(
-            serviceRunner,
+            useCaseRunner,
             { instanceOf: Exception }
         );
 

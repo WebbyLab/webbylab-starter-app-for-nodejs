@@ -1,7 +1,7 @@
 import ActionsSubmit from '../../../../../../lib/use-cases/main/actions/Submit.mjs';
 
 export default {
-    serviceClass : ActionsSubmit,
+    useCaseClass : ActionsSubmit,
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();

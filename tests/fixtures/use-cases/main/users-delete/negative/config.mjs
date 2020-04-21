@@ -1,7 +1,7 @@
 import UsersDelete from '../../../../../../lib/use-cases/main/users/Delete.mjs';
 
 export default {
-    serviceClass : UsersDelete,
+    useCaseClass : UsersDelete,
     before       : async (factory) => {
         await factory.standardSetup();
 

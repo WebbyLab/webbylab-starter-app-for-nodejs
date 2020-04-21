@@ -1,7 +1,7 @@
 import AdminsDelete from '../../../../../../lib/use-cases/admin/admins/Delete.mjs';
 
 export default {
-    serviceClass : AdminsDelete,
+    useCaseClass : AdminsDelete,
     before       : async (factory) => {
         await factory.standardSetup();
         const admins = await factory.setupAdmins();

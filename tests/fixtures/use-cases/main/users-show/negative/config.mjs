@@ -1,7 +1,7 @@
 import UsersShow from '../../../../../../lib/use-cases/main/users/Show.mjs';
 
 export default {
-    serviceClass : UsersShow,
+    useCaseClass : UsersShow,
     before       : async (factory) => {
         await factory.standardSetup();
 

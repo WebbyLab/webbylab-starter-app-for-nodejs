@@ -3,7 +3,7 @@ import config        from '../../../../../../lib/config.cjs';
 import SessionsCheck from '../../../../../../lib/use-cases/main/sessions/Check.mjs';
 
 export default {
-    serviceClass : SessionsCheck,
+    useCaseClass : SessionsCheck,
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();

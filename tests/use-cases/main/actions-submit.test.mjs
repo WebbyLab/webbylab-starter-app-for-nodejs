@@ -7,19 +7,19 @@ const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/actions-submit/positive`,
     'actions-submit/positive',
-    async ({ config: { serviceClass, before }, input, expected, checkSideEffects }) => {
+    async ({ config: { useCaseClass, before }, input, expected, checkSideEffects }) => {
         const { actionId, ...other } = await before(tester.factory);
 
-        await tester.testUseCasePositive({ serviceClass, input: { ...input, id: actionId }, expected });
+        await tester.testUseCasePositive({ useCaseClass, input: { ...input, id: actionId }, expected });
         await checkSideEffects({ actionId, ...other });
     }
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/actions-submit/negative`,
     'actions-submit/negative',
-    async ({ config: { serviceClass, before }, input, exception }) => {
+    async ({ config: { useCaseClass, before }, input, exception }) => {
         const { actionId } = await before(tester.factory);
 
-        await tester.testUseCaseNegative({ serviceClass, input: { id: actionId, ...input }, exception });
+        await tester.testUseCaseNegative({ useCaseClass, input: { id: actionId, ...input }, exception });
     }
 );

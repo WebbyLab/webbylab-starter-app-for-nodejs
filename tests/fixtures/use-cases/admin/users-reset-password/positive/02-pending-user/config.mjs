@@ -1,7 +1,7 @@
 import AdminUsersResetPassword from '../../../../../../../lib/use-cases/admin/users/ResetPassword.mjs';
 
 export default {
-    serviceClass : AdminUsersResetPassword,
+    useCaseClass : AdminUsersResetPassword,
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();

@@ -115,8 +115,8 @@ class Base {
         throw new Error('testUseCaseNegative is not implemented');
     }
 
-    async _testUseCasePositiveAbstract({ serviceRunner, expected = {} } = {}, assert = this.testContext) {
-        const got = await serviceRunner();
+    async _testUseCasePositiveAbstract({ useCaseRunner, expected = {} } = {}, assert = this.testContext) {
+        const got = await useCaseRunner();
         const validator = new LIVR.Validator(expected);
 
         validator.registerRules(extraRules);
@@ -139,8 +139,8 @@ class Base {
         return got;
     }
 
-    async _testUseCaseNegativeAbstract({ serviceRunner, exception = {} } = {}, assert = this.testContext) {
-        const error = await serviceRunner();
+    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
+        const error = await useCaseRunner();
 
         assert.deepEqual(error, exception);
     }

@@ -7,17 +7,17 @@ const dirname = getDirName(import.meta.url);
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/users-reset-password/positive`,
     'users-reset-password/positive',
-    async ({ config: { serviceClass, before }, expected, input, checkSideEffects }) => {
+    async ({ config: { useCaseClass, before }, expected, input, checkSideEffects }) => {
         await before(tester.factory);
-        await tester.testUseCasePositive({ serviceClass, input, expected });
+        await tester.testUseCasePositive({ useCaseClass, input, expected });
         await checkSideEffects({ email: input.data.email });
     }
 );
 
 tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/users-reset-password/negative`,
     'users-reset-password/negative',
-    async ({ config: { serviceClass, before }, input, exception }) => {
+    async ({ config: { useCaseClass, before }, input, exception }) => {
         await before(tester.factory);
-        await tester.testUseCaseNegative({ serviceClass, input, exception });
+        await tester.testUseCaseNegative({ useCaseClass, input, exception });
     }
 );
