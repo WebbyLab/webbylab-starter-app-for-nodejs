@@ -1,7 +1,9 @@
 import FileSystem     from 'fs';
+import { promisify }  from 'util';
 import test           from 'ava';
 import LIVR           from 'livr';
 import extraRules     from 'livr-extra-rules';
+import fsExt          from 'fs-ext';
 import nodemailerMock from 'nodemailer-mock';
 import stubTransport  from 'nodemailer-stub-transport';
 
@@ -13,6 +15,9 @@ import appConfig      from '../../lib/config.cjs';
 import TestFactory    from './TestFactory.mjs';
 
 const fs = FileSystem.promises;
+const flock = promisify(fsExt.flock);
+
+const LOCK_FILE = '.ava-tests-mutex.lock';
 
 // This function is needed to make linter alive for current file
 // eslint-disable-next-line func-style
@@ -36,6 +41,7 @@ class Tester {
 
         this.sequelize = sequelize;
         this.factory = new TestFactory();
+        this._lockFH = null;
     }
 
     readTestDirs(rootDir) {
@@ -82,10 +88,13 @@ class Tester {
                 try {
                     const data = await this.readTestData(rootDir, dir);
 
+                    // To allow to run several ava files in concurrent mode.
+                    await this._lock();
                     await this.sequelize.transaction(async t1 => {
                         try {
                             this.testContext = t;
                             global.testTransaction = t1;
+
                             await cb({ ...rootData, ...data }); // eslint-disable-line callback-return
                         } catch (error) {
                             console.log(error);
@@ -94,6 +103,7 @@ class Tester {
                         } finally {
                             global.testTransaction = null;
                             await t1.rollback();
+                            await this._unlock();
                         }
                     });
                 } catch (error) {
@@ -145,6 +155,16 @@ class Tester {
         const error = await serviceRunner();
 
         assert.deepEqual(error, exception);
+    }
+
+    async _lock() {
+        this._lockFH = await fs.open(LOCK_FILE, 'r');
+        await flock(this._lockFH.fd, 'ex');
+    }
+
+    async _unlock() {
+        await this._lockFH.close();
+        this._lockFH = null;
     }
 }
 

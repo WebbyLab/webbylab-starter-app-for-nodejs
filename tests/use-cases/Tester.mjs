@@ -1,7 +1,7 @@
 import { Exception }  from '../../packages.mjs';
 import AbstractTester from '../lib/AbstractTester.mjs';
 
-class RestAPITester extends AbstractTester {
+class UseCaseTester extends AbstractTester {
     async testUseCasePositive({ serviceClass: Service, input = {}, expected = {}, context = {} } = {}) {
         function serviceRunner() {
             const service = new Service({ context });
@@ -32,4 +32,4 @@ class RestAPITester extends AbstractTester {
     }
 }
 
-export default RestAPITester;
+export default UseCaseTester;

@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 
+
 import '../../../app.mjs';
 
 import AbstractTester from '../../lib/AbstractTester.mjs';
@@ -7,12 +8,10 @@ import AbstractTester from '../../lib/AbstractTester.mjs';
 class RestAPITester extends AbstractTester {
     constructor(...params) {
         super(...params);
-
-        this._apiPrefix = `http://localhost:${process.env.PORT}`;
     }
 
     async testUseCasePositive({ requestBuilder, input = {}, expected = {} } = {}) {
-        const apiPrefix = this._apiPrefix;
+        const apiPrefix = this._getApiPrefix();
 
         async function serviceRunner() {
             const request = requestBuilder(input);
@@ -38,7 +37,7 @@ class RestAPITester extends AbstractTester {
     }
 
     async testUseCaseNegative({ requestBuilder, input = {}, exception = {} } = {}) {
-        const apiPrefix = this._apiPrefix;
+        const apiPrefix = this._getApiPrefix();
 
         async function serviceRunner() {
             const request = requestBuilder(input);
@@ -67,6 +66,12 @@ class RestAPITester extends AbstractTester {
         const error = await serviceRunner();
 
         assert.deepEqual(error, exception);
+    }
+
+    _getApiPrefix() {
+        // global.REST_API_PORT is defined in RestAPI app.
+        // TODO: better way is to import app and use server.address() to get the port
+        return  `http://localhost:${global.REST_API_PORT}`;
     }
 }
 
