@@ -1,5 +1,3 @@
-import path             from 'path';
-import { getDirName }   from './lib/utils/index.mjs';
 import * as Chista      from './lib/chista.mjs';
 import * as API         from './lib/api/index.mjs';
 import * as RestAPI     from './lib/api/rest-api/app.mjs';
@@ -10,14 +8,7 @@ import UseCaseBase      from './lib/use-cases/Base.mjs';
 import config           from './lib/config.cjs';
 
 // Init infrastructure
-const dirname = getDirName(import.meta.url);
 const logger  = new Logger();
-
-logger.init({
-    directory : path.join(dirname, './logs'),
-    name      : process.env.PROJECT_NAME
-});
-
 const notificator = new EmailSender({
     mailOptions : config.mail,
     mainUrl     : config.mainUrl
