@@ -15,7 +15,7 @@
     "mail": {
         "from": "{{MAIL_FROM}}",
         "transport": "{{MAIL_TRANSPORT}}",
-        "transport_options": {
+        "transportOptions": {
             "host" : "{{MAIL_HOST}}",
             "port" : "{{MAIL_PORT}}",
             "auth": {
