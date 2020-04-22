@@ -1,14 +1,13 @@
+import nodemailerMock          from 'nodemailer-mock';
 import StoredTriggerableAction from '../../lib/domain-model/StoredTriggerableAction.mjs';
 import Admin                   from '../../lib/domain-model/Admin.mjs';
 import User                    from '../../lib/domain-model/User.mjs';
 
 class TestFactory {
-    constructor() {
-
-    }
+    constructor() {}
 
     async standardSetup() {
-
+        nodemailerMock.mock.reset();
     }
 
     async setupUsers() {

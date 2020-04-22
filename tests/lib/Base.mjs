@@ -1,16 +1,18 @@
-import FileSystem    from 'fs';
-import { promisify } from 'util';
-import test          from 'ava';
-import LIVR          from 'livr';
-import fsExt         from 'fs-ext';
+import FileSystem     from 'fs';
+import { promisify }  from 'util';
+import test           from 'ava';
+import LIVR           from 'livr';
+import extraRules     from 'livr-extra-rules';
+import fsExt          from 'fs-ext';
+import nodemailerMock from 'nodemailer-mock';
+import stubTransport  from 'nodemailer-stub-transport';
 
-import extraRules    from 'livr-extra-rules';
+import initAllModels  from '../../lib/domain-model/initModels.mjs';
+import UseCaseBase    from '../../lib/use-cases/Base.mjs';
+import EmailSender    from '../../lib/infrastructure/notificator/Mail.mjs';
+import appConfig      from '../../lib/config.cjs';
 
-import initAllModels from '../../lib/domain-model/initModels.mjs';
-import UseCaseBase   from '../../lib/use-cases/Base.mjs';
-import appConfig     from '../../lib/config.cjs';
-
-import TestFactory   from './TestFactory.mjs';
+import TestFactory    from './TestFactory.mjs';
 
 const fs = FileSystem.promises;
 const flock = promisify(fsExt.flock);
@@ -27,6 +29,16 @@ class Base {
     constructor() {
         const { sequelize } = initAllModels(appConfig['test-db']);
 
+        const notificator = new EmailSender({
+            mailOptions : appConfig.mail,
+            mainUrl     : appConfig.mainUrl
+        });
+
+        const transport = nodemailerMock.createTransport(stubTransport());
+
+        notificator.setTransport(transport);
+
+        UseCaseBase.setNotificatorInstanse(notificator);
         UseCaseBase.setSequelizeInstanse(sequelize); // TODO find a better way
 
         this.sequelize = sequelize;
