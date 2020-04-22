@@ -10,7 +10,7 @@ class RestAPITester extends Base {
     }
 
     async testUseCasePositive({ requestBuilder, input = {}, expected = {} } = {}) {
-        const apiPrefix = this._getApiPrefix();
+        const apiPrefix = this.#getApiPrefix();
 
         async function useCaseRunner() {
             const request = requestBuilder(input);
@@ -36,7 +36,7 @@ class RestAPITester extends Base {
     }
 
     async testUseCaseNegative({ requestBuilder, input = {}, exception = {} } = {}) {
-        const apiPrefix = this._getApiPrefix();
+        const apiPrefix = this.#getApiPrefix();
 
         async function useCaseRunner() {
             const request = requestBuilder(input);
@@ -67,7 +67,7 @@ class RestAPITester extends Base {
         assert.deepEqual(error, exception);
     }
 
-    _getApiPrefix() {
+    #getApiPrefix = () => {
         // global.REST_API_PORT is defined in RestAPI app.
         // TODO: better way is to import app and use server.address() to get the port
         return  `http://localhost:${global.REST_API_PORT}`;

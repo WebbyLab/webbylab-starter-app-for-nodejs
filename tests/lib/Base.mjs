@@ -22,6 +22,8 @@ const LOCK_FILE = '.ava-tests-mutex.lock';
 const lazyImport = (path) => import(path);
 
 class Base {
+    #lockFH = null;
+
     constructor() {
         const { sequelize } = initAllModels(appConfig['test-db']);
 
@@ -29,7 +31,6 @@ class Base {
 
         this.sequelize = sequelize;
         this.factory = new TestFactory();
-        this._lockFH = null;
     }
 
     readTestDirs(rootDir) {
@@ -77,7 +78,7 @@ class Base {
                     const data = await this.readTestData(rootDir, dir);
 
                     // To allow to run several ava files in concurrent mode.
-                    await this._lock();
+                    await this.#lock();
                     await this.sequelize.transaction(async t1 => {
                         try {
                             this.testContext = t;
@@ -91,7 +92,7 @@ class Base {
                         } finally {
                             global.testTransaction = null;
                             await t1.rollback();
-                            await this._unlock();
+                            await this.#unlock();
                         }
                     });
                 } catch (error) {
@@ -145,14 +146,14 @@ class Base {
         assert.deepEqual(error, exception);
     }
 
-    async _lock() {
-        this._lockFH = await fs.open(LOCK_FILE, 'r');
-        await flock(this._lockFH.fd, 'ex');
+    #lock = async () => {
+        this.#lockFH = await fs.open(LOCK_FILE, 'r');
+        await flock(this.#lockFH.fd, 'ex');
     }
 
-    async _unlock() {
-        await this._lockFH.close();
-        this._lockFH = null;
+    #unlock = async () => {
+        await this.#lockFH.close();
+        this.#lockFH = null;
     }
 }
 
