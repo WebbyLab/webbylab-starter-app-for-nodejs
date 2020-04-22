@@ -50,6 +50,24 @@ process.on('SIGINT', async () => {
     await shutdown();
 });
 
+process.on('unhandledRejection', error => {
+    console.error(error);
+
+    logger.fatal({
+        type  : 'UnhandledRejection',
+        error : error.stack
+    });
+});
+
+process.on('uncaughtException', error => {
+    console.error(error);
+
+    logger.fatal({
+        type  : 'UncaughtException',
+        error : error.stack
+    });
+});
+
 // Graceful shutdown
 async function shutdown() {
     await RestAPI.stop();
