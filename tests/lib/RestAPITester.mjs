@@ -61,12 +61,6 @@ class RestAPITester extends Base {
         });
     }
 
-    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
-        const error = await useCaseRunner();
-
-        assert.deepEqual(error, exception);
-    }
-
     #getApiPrefix = () => {
         // global.REST_API_PORT is defined in RestAPI app.
         // TODO: better way is to import app and use server.address() to get the port
