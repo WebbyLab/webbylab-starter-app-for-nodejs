@@ -1,7 +1,6 @@
-import jwt            from 'jsonwebtoken';
-import config         from '../../../../lib/config.cjs';
-import { getDirName } from '../../../../lib/utils/index.mjs';
-import Tester         from '../Tester.mjs';
+import { generateToken } from '../../../../lib/use-cases/utils/jwtUtils.mjs';
+import { getDirName }    from '../../../../lib/utils/index.mjs';
+import Tester            from '../../../lib/RestAPITester.mjs';
 
 const tester = new Tester();
 
@@ -21,7 +20,7 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/
     'admin/admins-show/positive',
     async ({ config: { before }, expected }) => {
         const adminId = await before(tester.factory);
-        const accessToken = jwt.sign({ id: adminId }, config.secret);
+        const accessToken = generateToken({ id: adminId });
 
         await tester.testUseCasePositive({
             requestBuilder : () => requestBuilder(adminId, accessToken),
@@ -34,7 +33,7 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/
     'admin/admins-show/negative',
     async ({ config: { before }, input, exception }) => {
         const adminId = await before(tester.factory);
-        const accessToken = jwt.sign({ id: adminId }, config.secret);
+        const accessToken = generateToken({ id: adminId });
 
         await tester.testUseCaseNegative({
             requestBuilder : () => requestBuilder(input.id, accessToken),

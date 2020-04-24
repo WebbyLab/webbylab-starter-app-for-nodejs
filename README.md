@@ -1,7 +1,7 @@
 # WebbyLab's Node.JS startkit
 
 1. Based on ideas of Clean Architecture
-2. Well defined abstractions (controllers, service layer, domain model etc).
+2. Well defined abstractions (controllers, use case layer, domain model etc).
 3. Works for small and large projects
 4. Follows 12 factor app approach
 5. Modern JS (including ES6 for sequalize)

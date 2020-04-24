@@ -1,7 +1,7 @@
 import AdminUsersShow from '../../../../../../../lib/use-cases/admin/users/Show.mjs';
 
 export default {
-    serviceClass : AdminUsersShow,
+    useCaseClass : AdminUsersShow,
     before       : async (factory) => {
         await factory.standardSetup();
         const users = await factory.setupUsers();
