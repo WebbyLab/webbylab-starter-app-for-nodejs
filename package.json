@@ -48,7 +48,7 @@
     "uuid": "^7.0.2"
   },
   "devDependencies": {
-    "ava": "^3.5.1",
+    "ava": "^3.7.1",
     "babel-eslint": "^10.1.0",
     "c8": "^7.1.0",
     "eslint": "^6.8.0",
@@ -62,9 +62,9 @@
     "eslint-plugin-react": "^7.19.0",
     "fs-ext": "^2.0.0",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.2",
     "nodemailer-mock": "^1.5.1",
     "nodemailer-stub-transport": "^1.1.0",
+    "nodemon": "^2.0.2",
     "pino-pretty": "^3.6.1",
     "pre-commit": "^1.2.2"
   },
