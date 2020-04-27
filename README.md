@@ -17,7 +17,7 @@
 
 ## RUN DEVELOPMENT VERSION
 1. npm install
-2. npm run migration:dev
+2. npm run migration:db
 3. npm run nodemon
 
 
@@ -27,14 +27,13 @@
 
 
 ## RUN PRODUCTION VERSION
-1. apt-get install mysql-server // (5.7.8 version)
+1. apt-get install mysql-server // (8.0.19 version)
 2. run mysql-server: ```service mysql start```
 3. create mysql schema // new db
-4. cp etc/config.json.sample etc/config.json // Set SMTP options (or use local sendmail)
-5. cp etc/db.json.sample etc/db.json // Set correct database options
-6. npm install
-7. npm run migration
-8. npm start
+4. create .env file // Define variables to override .env.defaults
+5. npm install
+6. npm run migration:db
+7. npm start
 
 ## CREATE NEW USER:
 npm run create-user -- --email=your@email.com --password=password
