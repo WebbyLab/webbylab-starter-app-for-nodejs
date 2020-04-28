@@ -1,5 +1,5 @@
 import { Exception } from '../../packages.mjs';
-import Base          from './Base.mjs';
+import Base          from './BaseTester.mjs';
 
 class UseCaseTester extends Base {
     async testUseCasePositive({ useCaseClass: UseCase, input = {}, expected = {}, context = {} } = {}) {
@@ -9,7 +9,7 @@ class UseCaseTester extends Base {
             return useCase.run(input);
         }
 
-        return this._testUseCasePositiveAbstract({ useCaseRunner, expected });
+        return this.testUseCasePositiveAbstract({ useCaseRunner, expected });
     }
 
     async testUseCaseNegative({ useCaseClass: UseCase, input = {}, exception = {}, context = {} } = {}) {
@@ -19,10 +19,10 @@ class UseCaseTester extends Base {
             return useCase.run(input);
         }
 
-        return this._testUseCaseNegativeAbstract({ useCaseRunner, exception });
+        return this.testUseCaseNegativeAbstract({ useCaseRunner, exception });
     }
 
-    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
+    async testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
         const error = await assert.throwsAsync(
             useCaseRunner,
             { instanceOf: Exception }

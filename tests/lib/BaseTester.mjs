@@ -1,9 +1,7 @@
 import FileSystem     from 'fs';
-import { promisify }  from 'util';
 import test           from 'ava';
 import LIVR           from 'livr';
 import extraRules     from 'livr-extra-rules';
-import fsExt          from 'fs-ext';
 import nodemailerMock from 'nodemailer-mock';
 import stubTransport  from 'nodemailer-stub-transport';
 
@@ -15,17 +13,12 @@ import appConfig      from '../../lib/config.cjs';
 import TestFactory    from './TestFactory.mjs';
 
 const fs = FileSystem.promises;
-const flock = promisify(fsExt.flock);
-
-const LOCK_FILE = '.ava-tests-mutex.lock';
 
 // This function is needed to make linter alive for current file
 // eslint-disable-next-line func-style
 const lazyImport = (path) => import(path);
 
-class Base {
-    #lockFH = null;
-
+class BaseTester {
     constructor() {
         const { sequelize } = initAllModels(appConfig['test-db']);
 
@@ -89,9 +82,10 @@ class Base {
                 try {
                     const data = await this.readTestData(rootDir, dir);
 
-                    // To allow to run several ava files in concurrent mode.
-                    await this.#lock();
                     await this.sequelize.transaction(async t1 => {
+                        // To allow to run several ava files in concurrent mode.
+                        await this.#lockDBExclusively();
+
                         try {
                             this.testContext = t;
                             global.testTransaction = t1;
@@ -104,7 +98,6 @@ class Base {
                         } finally {
                             global.testTransaction = null;
                             await t1.rollback();
-                            await this.#unlock();
                         }
                     });
                 } catch (error) {
@@ -128,7 +121,7 @@ class Base {
         throw new Error('testUseCaseNegative is not implemented');
     }
 
-    async _testUseCasePositiveAbstract({ useCaseRunner, expected = {} } = {}, assert = this.testContext) {
+    async testUseCasePositiveAbstract({ useCaseRunner, expected = {} } = {}, assert = this.testContext) {
         const got = await useCaseRunner();
         const validator = new LIVR.Validator(expected);
 
@@ -152,21 +145,23 @@ class Base {
         return got;
     }
 
-    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
+    async testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
         const error = await useCaseRunner();
 
         assert.deepEqual(error, exception);
     }
 
-    #lock = async () => {
-        this.#lockFH = await fs.open(LOCK_FILE, 'r');
-        await flock(this.#lockFH.fd, 'ex');
-    }
+    #lockDBExclusively = async () => {
+        const { QueryTypes } = this.sequelize;
+        // Ava runs multiple tests files the same time. But we have only one db.
+        // We use this lock as mutex for database access
+        // So, only one test will work with the database the same time.
+        // We expect that this method is called at the beginning of a transaction.
+        // If you will rollback DB in another way. Start transaction in this method and
+        // rollback it in some unclockDB method
 
-    #unlock = async () => {
-        await this.#lockFH.close();
-        this.#lockFH = null;
+        await this.sequelize.query('SELECT * FROM `SequelizeMeta` FOR UPDATE', { type: QueryTypes.SELECT });
     }
 }
 
-export default Base;
+export default BaseTester;
