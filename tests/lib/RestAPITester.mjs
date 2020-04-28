@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import '../../app.mjs';
 import '../../lib/api/rest-api/app.mjs';
 
-import Base from './Base.mjs';
+import Base from './BaseTester.mjs';
 
 class RestAPITester extends Base {
     constructor(...params) {
@@ -26,7 +26,7 @@ class RestAPITester extends Base {
             return response.json();
         }
 
-        return this._testUseCasePositiveAbstract({
+        return this.testUseCasePositiveAbstract({
             useCaseRunner,
             expected : {
                 ...expected,
@@ -52,7 +52,7 @@ class RestAPITester extends Base {
             return response.json();
         }
 
-        return this._testUseCaseNegativeAbstract({
+        return this.testUseCaseNegativeAbstract({
             useCaseRunner,
             exception : {
                 status : 0,
