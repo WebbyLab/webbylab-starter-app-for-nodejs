@@ -13,7 +13,7 @@
 11. Built on top of express.js
 12. User management out of the box **(in progress)**
 13. SMTP support
-
+14. Works in Linux, Mac, Windows
 
 ## RUN DEVELOPMENT VERSION
 1. docker-compose up
