@@ -1,4 +1,3 @@
-import * as Chista      from './lib/chista.mjs';
 import * as API         from './lib/api/index.mjs';
 import * as RestAPI     from './lib/api/rest-api/app.mjs';
 import * as DomainModel from './lib/domain-model/index.mjs';
@@ -15,9 +14,6 @@ const notificator = new EmailSender({
 });
 
 logger.info(`[App] Init Mode: ${process.env.MODE}`);
-
-// Init Chista
-Chista.setLogger(logger);
 
 // Init Controllers Layer (API)
 API.setLogger(logger);
