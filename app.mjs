@@ -8,7 +8,7 @@ import UseCaseBase      from './lib/use-cases/Base.mjs';
 import config           from './lib/config.cjs';
 
 async function main() {
-// Init infrastructure
+    // Init infrastructure
     const logger  = new Logger();
     const notificator = new EmailSender({
         mailOptions : config.mail,
@@ -23,7 +23,9 @@ async function main() {
     RestAPI.start({
         appPort : (process.env.MODE === 'test' ? 0 : config.appPort)
     });
-    await JsonRPC.start({ wssPort: process.env.WSS_PORT });
+    await JsonRPC.start({
+        wssPort : config.wssPort
+    });
 
     // Init Domain Model Layer
     const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';

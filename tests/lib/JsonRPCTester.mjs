@@ -24,9 +24,12 @@ class JsonRPCTester extends Base {
         });
     }
 
-    async testUseCasePositive({ method, input = {}, expected = {} } = {}) {
+    async testUseCasePositive({ method, input = {}, expected = {}, context = {} } = {}) {
         const rpcClient = this.#rpcClient;
 
+        if (!method) throw new Error('DEFINE METHOD');
+        // TODO: remove on json rpc sessions complete
+        await rpcClient.callMethod('register', [ context ]);
         async function useCaseRunner() {
             const response = await rpcClient.callMethod(method, [ input ]);
 
@@ -35,7 +38,10 @@ class JsonRPCTester extends Base {
 
         return this._testUseCasePositiveAbstract({
             useCaseRunner,
-            expected
+            expected : {
+                ...expected,
+                status : { is: 1 }
+            }
         });
     }
 
