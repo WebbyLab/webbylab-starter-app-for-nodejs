@@ -37,6 +37,8 @@
     "jsonwebtoken": "^8.4.0",
     "livr": "^2.3.0",
     "livr-extra-rules": "^1.1.0",
+    "mole-rpc": "^1.0.4",
+    "mole-rpc-transport-ws": "^0.4.2",
     "mysql2": "^2.1.0",
     "nodemailer": "^6.4.6",
     "nodemailer-sendmail-transport": "^1.0.2",
@@ -45,7 +47,8 @@
     "rename-keys": "^2.0.1",
     "sequelize": "^5.21.5",
     "sequelize-cli": "^5.5.1",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "ws": "^7.2.5"
   },
   "devDependencies": {
     "ava": "^3.7.1",
