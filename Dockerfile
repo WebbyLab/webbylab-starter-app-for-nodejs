@@ -1,10 +1,10 @@
-FROM node:13-alpine as BUILDER
+FROM node:14-alpine as BUILDER
 
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm install --prod
 
-FROM node:13-alpine
+FROM node:14-alpine
 WORKDIR /app
 COPY --from=BUILDER /app .
 
@@ -15,7 +15,9 @@ COPY --from=BUILDER /app .
 
 ENV DB_HOST=db
 
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=8000
+EXPOSE 8000
+ENV WSS_PORT=1234
+EXPOSE 8080:1234
 
 CMD [ "npm", "start"]
