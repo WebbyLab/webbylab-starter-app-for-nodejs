@@ -53,7 +53,7 @@
   "devDependencies": {
     "ava": "^3.8.1",
     "babel-eslint": "^10.1.0",
-    "c8": "^7.1.1",
+    "c8": "^7.1.2",
     "eslint": "^6.8.0",
     "eslint-config-webbylab": "^4.0.0",
     "eslint-plugin-ava": "^10.3.0",
