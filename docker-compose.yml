@@ -9,9 +9,9 @@ services:
         environment:
             # the image will only initialize the database if the data directory is empty
             MYSQL_DATABASE: starterkit
-            MYSQL_USER: starter
-            MYSQL_PASSWORD: starter
-            MYSQL_ROOT_PASSWORD: starter
+            MYSQL_USER: starterkit
+            MYSQL_PASSWORD: starterkit
+            MYSQL_ROOT_PASSWORD: starterkit
     test-db:
         image: mysql:8.0.19
         command: --default-authentication-plugin=mysql_native_password
@@ -20,9 +20,9 @@ services:
         environment:
             # the image will only initialize the database if the data directory is empty
             MYSQL_DATABASE: starterkit-test
-            MYSQL_USER: starter
-            MYSQL_PASSWORD: starter
-            MYSQL_ROOT_PASSWORD: starter
+            MYSQL_USER: starterkit
+            MYSQL_PASSWORD: starterkit
+            MYSQL_ROOT_PASSWORD: starterkit
     adminer:
         image: adminer
         restart: always

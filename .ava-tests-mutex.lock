@@ -1,1 +1,0 @@
-This file for tests only. We use this file as mutex to allow AVAs concurrency with a single database
