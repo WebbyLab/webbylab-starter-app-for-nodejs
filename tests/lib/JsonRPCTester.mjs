@@ -5,7 +5,7 @@ import TransportClientWS from 'mole-rpc-transport-ws/TransportClientWS.js';
 
 import * as JsonRPC      from '../../lib/api/json-rpc/app.mjs';
 
-import Base from './Base.mjs';
+import Base              from './Base.mjs';
 
 class JsonRPCTester extends Base {
     #ws = null;
@@ -14,9 +14,11 @@ class JsonRPCTester extends Base {
     constructor(...params) {
         super(...params);
 
+        const wssPort = this.#getWssPort();
+
         // TODO: check async init
-        JsonRPC.start({ wssPort: '12345' });
-        this.#ws = new WebSocket('ws://localhost:12345/');
+        JsonRPC.start({ wssPort });
+        this.#ws = new WebSocket(`ws://localhost:${wssPort}/`);
         this.#rpcClient = new MoleClient({
             transport : new TransportClientWS({
                 wsBuilder : () => this.#ws
@@ -69,11 +71,12 @@ class JsonRPCTester extends Base {
         assert.deepEqual(error, new X.ExecutionError({ data: exception }));
     }
 
-    // #getApiPrefix = () => {
-    //     // global.REST_API_PORT is defined in RestAPI app.
-    //     // TODO: better way is to import app and use server.address() to get the port
-    //     return  `ws://localhost:${global.REST_API_PORT}`;
-    // }
+    #getWssPort = () => {
+        // TODO: find a way to find free port
+        const wssPort = Math.floor(Math.random() * 10000) + 10000;
+
+        return wssPort;
+    }
 }
 
 export default JsonRPCTester;

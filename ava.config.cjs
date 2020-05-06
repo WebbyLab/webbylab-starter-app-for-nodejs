@@ -4,14 +4,13 @@ module.exports = {
         '--experimental-modules',
         '--experimental-json-modules'
     ],
-    serial  : true,
-    // serial  : false,
+    serial  : false,
     verbose : false,
     files   : [
         'tests/api/**/*.test.mjs',
         'tests/use-cases/**/*.test.mjs'
     ],
-    // concurrency          : 3,
+    concurrency          : 3,
     environmentVariables : {
         MODE : 'test'
     }
