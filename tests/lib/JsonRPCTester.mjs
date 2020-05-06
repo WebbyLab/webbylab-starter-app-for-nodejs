@@ -5,7 +5,7 @@ import TransportClientWS from 'mole-rpc-transport-ws/TransportClientWS.js';
 
 import * as JsonRPC      from '../../lib/api/json-rpc/app.mjs';
 
-import Base              from './Base.mjs';
+import Base              from './BaseTester.mjs';
 
 class JsonRPCTester extends Base {
     #ws = null;
@@ -38,7 +38,7 @@ class JsonRPCTester extends Base {
             return response;
         }
 
-        return this._testUseCasePositiveAbstract({
+        return this.testUseCasePositiveAbstract({
             useCaseRunner,
             expected : {
                 ...expected,
@@ -56,13 +56,13 @@ class JsonRPCTester extends Base {
             return response;
         }
 
-        return this._testUseCaseNegativeAbstract({
+        return this.testUseCaseNegativeAbstract({
             useCaseRunner,
             exception
         });
     }
 
-    async _testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
+    async testUseCaseNegativeAbstract({ useCaseRunner, exception = {} } = {}, assert = this.testContext) {
         const error = await assert.throwsAsync(
             useCaseRunner,
             { instanceOf: X.ExecutionError }
