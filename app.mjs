@@ -20,12 +20,8 @@ async function main() {
     // Init Controllers Layer (API)
     API.setLogger(logger);
 
-    RestAPI.start({
-        appPort : (process.env.MODE === 'test' ? 0 : config.appPort)
-    });
-    await JsonRPC.start({
-        wssPort : config.wssPort
-    });
+    RestAPI.start({ appPort: config.appPort });
+    await JsonRPC.start({ wssPort: config.wssPort });
 
     // Init Domain Model Layer
     const dbMode = process.env.MODE === 'application' ? 'db' : 'test-db';
