@@ -1,12 +1,13 @@
-import fetch from 'node-fetch';
-import '../../app.mjs';
-import '../../lib/api/rest-api/app.mjs';
+import fetch        from 'node-fetch';
+import * as RestAPI from '../../lib/api/rest-api/app.mjs';
 
 import Base from './BaseTester.mjs';
 
 class RestAPITester extends Base {
     constructor(...params) {
         super(...params);
+
+        RestAPI.start({ appPort: 0 });
     }
 
     async testUseCasePositive({ requestBuilder, input = {}, expected = {} } = {}) {
