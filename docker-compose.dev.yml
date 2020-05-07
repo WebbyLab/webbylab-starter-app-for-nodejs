@@ -4,13 +4,13 @@ services:
     backend:
         build: ./
         command: npm start
-        ports: ['8000:8000', '8080:1234']
+        ports: ['8000:8000', '8080:12345']
         env_file: ['.env']
         depends_on: ['db', 'mailhog']
         volumes: ['.:/app']
         environment:
             MODE: application
             PORT: 8000
-            WSS_PORT: 1234
+            WSS_PORT: 12345
             DB_HOST: db
             MAIL_HOST: mailhog
