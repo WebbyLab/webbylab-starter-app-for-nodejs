@@ -63,6 +63,7 @@
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-security": "^1.4.0",
     "node-fetch": "^2.6.0",
     "nodemailer-mock": "^1.5.1",
     "nodemailer-stub-transport": "^1.1.0",

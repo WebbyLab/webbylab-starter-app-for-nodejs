@@ -22,7 +22,8 @@ function requestBuilder(input, token) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/admins-list/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/admin/admins-list/positive`,
     'admin/admins-list/positive',
     async ({ config: { before }, input, expected }) => {
         const adminId = await before(tester.factory);

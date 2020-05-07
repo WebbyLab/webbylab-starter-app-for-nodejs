@@ -17,7 +17,8 @@ function requestBuilder(input, token) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/admins-create/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/admin/admins-create/positive`,
     'admin/admins-create/positive',
     async ({ config: { before }, input, expected }) => {
         const adminId = await before(tester.factory);
@@ -31,7 +32,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/
     }
 );
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/admins-create/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/admin/admins-create/negative`,
     'admin/admins-create/negative',
     async ({ config: { before }, input, exception }) => {
         const adminId = await before(tester.factory);

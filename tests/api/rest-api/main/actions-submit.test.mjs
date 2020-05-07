@@ -13,7 +13,8 @@ function requestBuilder(input, actionId) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/actions-submit/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/actions-submit/positive`,
     'actions-submit/positive',
     async ({ config: { before }, input, expected, checkSideEffects }) => {
         const { actionId, ...other } = await before(tester.factory);
@@ -27,7 +28,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/a
     }
 );
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/actions-submit/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/actions-submit/negative`,
     'actions-submit/negative',
     async ({ config: { before }, input, exception }) => {
         const { actionId } = await before(tester.factory);

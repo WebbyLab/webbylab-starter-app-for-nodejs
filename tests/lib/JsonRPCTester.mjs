@@ -9,6 +9,7 @@ import Base              from './BaseTester.mjs';
 
 class JsonRPCTester extends Base {
     #ws = null;
+
     #rpcClient = null;
 
     constructor(...params) {

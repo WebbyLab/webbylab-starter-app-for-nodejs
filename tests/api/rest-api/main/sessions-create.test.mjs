@@ -13,7 +13,8 @@ function requestBuilder(input) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/sessions-create/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/sessions-create/positive`,
     'sessions-create/positive',
     async ({ config: { before }, input, expected }) => {
         await before(tester.factory);
@@ -21,7 +22,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/s
     }
 );
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/sessions-create/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/sessions-create/negative`,
     'sessions-create/negative',
     async ({ config: { before }, input, exception }) => {
         await before(tester.factory);

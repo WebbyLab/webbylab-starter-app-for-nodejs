@@ -16,7 +16,8 @@ function requestBuilder(userId, token) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/users-reset-password/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/admin/users-reset-password/positive`,
     'admin/users-reset-password/positive',
     async ({ config: { before }, expected, checkSideEffects }) => {
         const { userId, adminId } = await before(tester.factory);
@@ -31,7 +32,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/
     }
 );
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/admin/users-reset-password/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/admin/users-reset-password/negative`,
     'users-reset-password/negative',
     async ({ config: { before }, input = {}, exception }) => {
         const { userId, adminId } = await before(tester.factory);
