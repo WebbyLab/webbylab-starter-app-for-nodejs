@@ -22,13 +22,17 @@ function requestBuilder(input, token) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/users-list/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/users-list/positive`,
     'users-list/positive',
     async ({ config: { before }, input, expected }) => {
         const userId = await before(tester.factory);
         const accessToken = generateToken({ id: userId });
 
         await tester.testUseCasePositive({
-            requestBuilder : (...args) => requestBuilder(...args, accessToken), input, expected });
+            requestBuilder : (...args) => requestBuilder(...args, accessToken),
+            input,
+            expected
+        });
     }
 );

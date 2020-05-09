@@ -15,7 +15,8 @@ function requestBuilder(token) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/sessions-check/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/sessions-check/negative`,
     'sessions-check/negative',
     async ({ config: { before }, input, exception }) => {
         const tokens = await before(tester.factory);

@@ -5,7 +5,8 @@ const tester = new Tester();
 
 const dirname = getDirName(import.meta.url);
 
-tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/users-delete/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../fixtures/use-cases/main/users-delete/positive`,
     'users-delete/positive',
     async ({ config: { useCaseClass, before }, expected, checkSideEffects }) => {
         const userId = await before(tester.factory);
@@ -16,7 +17,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/user
     }
 );
 
-tester.setupTestsWithTransactions(`${dirname}/../../fixtures/use-cases/main/users-delete/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../fixtures/use-cases/main/users-delete/negative`,
     'users-delete/negative',
     async ({ config: { useCaseClass, before }, input, exception, context }) => {
         await before(tester.factory);

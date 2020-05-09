@@ -13,7 +13,8 @@ function requestBuilder(input) {
     };
 }
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/users-reset-password/positive`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/users-reset-password/positive`,
     'users-reset-password/positive',
     async ({ config: { before }, expected, input, checkSideEffects }) => {
         await before(tester.factory);
@@ -22,7 +23,8 @@ tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/u
     }
 );
 
-tester.setupTestsWithTransactions(`${dirname}/../../../fixtures/use-cases/main/users-reset-password/negative`,
+tester.setupTestsWithTransactions(
+    `${dirname}/../../../fixtures/use-cases/main/users-reset-password/negative`,
     'users-reset-password/negative',
     async ({ config: { before }, input, exception }) => {
         await before(tester.factory);
