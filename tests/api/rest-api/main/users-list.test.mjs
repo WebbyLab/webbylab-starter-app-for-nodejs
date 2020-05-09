@@ -30,6 +30,9 @@ tester.setupTestsWithTransactions(
         const accessToken = generateToken({ id: userId });
 
         await tester.testUseCasePositive({
-            requestBuilder : (...args) => requestBuilder(...args, accessToken), input, expected });
+            requestBuilder : (...args) => requestBuilder(...args, accessToken),
+            input,
+            expected
+        });
     }
 );

@@ -1,5 +1,9 @@
 {
     "extends": "webbylab",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
     "plugins": [
         "ava"
     ]
