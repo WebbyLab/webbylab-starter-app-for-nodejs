@@ -74,7 +74,8 @@ class JsonRPCTester extends Base {
 
     #getWssPort = () => {
         // TODO: find a way to find free port
-        const wssPort = Math.floor(Math.random() * 10000) + 10000;
+        // eslint-disable-next-line no-magic-numbers
+        const wssPort = 10000 + Math.floor(Math.random() * 10000);
 
         return wssPort;
     }
