@@ -1,0 +1,7 @@
+import {{MODEL_NAME}} from '{{RELATIVE_MODEL_PATH}}';
+import {{MODEL_NAME_PLURAL_toLC}} from '{{RELATIVE_DATA_FIXTURES_PATH}}';
+
+async setup{{MODEL_NAME_PLURAL}}() {
+    const saved{{MODEL_NAME_PLURAL}} = await {{MODEL_NAME}}.bulkCreate({{MODEL_NAME_PLURAL_toLC}});
+    return saved{{MODEL_NAME_PLURAL}};
+}

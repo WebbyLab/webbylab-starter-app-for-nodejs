@@ -1,69 +1,23 @@
 import nodemailerMock          from 'nodemailer-mock';
 import StoredTriggerableAction from '../../lib/domain-model/StoredTriggerableAction.mjs';
-import Admin                   from '../../lib/domain-model/Admin.mjs';
-import User                    from '../../lib/domain-model/User.mjs';
+
+import Admin from '../../lib/domain-model/Admin.mjs';
+import admins from '../fixtures/data/admins.json';
+
+import User from '../../lib/domain-model/User.mjs';
+import users from '../fixtures/data/users.json';
 
 class TestFactory {
-    constructor() {}
-
-    async standardSetup() {
-        nodemailerMock.mock.reset();
-    }
-
-    async setupUsers() {
-        const users = [
-            {
-                email          : 'default1@gmail.com',
-                firstName      : 'First',
-                secondName     : 'Default',
-                password       : 'password',
-                status         : 'PENDING',
-                agreeWithTerms : true
-            },
-            {
-                email          : 'default2@gmail.com',
-                firstName      : 'Second',
-                secondName     : 'Default',
-                password       : 'password',
-                status         : 'ACTIVE',
-                agreeWithTerms : true
-            },
-            {
-                email          : 'default3@gmail.com',
-                firstName      : 'Third',
-                secondName     : 'Default',
-                password       : 'password',
-                status         : 'BLOCKED',
-                agreeWithTerms : true
-            }
-        ];
-        const savedUsers = await User.bulkCreate(users);
-
-        return savedUsers;
-    }
-
     async setupAdmins() {
-        const admins = [
-            {
-                email          : 'admin1@gmail.com',
-                firstName      : 'First',
-                secondName     : 'Default',
-                password       : 'password',
-                status         : 'PENDING',
-                agreeWithTerms : true
-            },
-            {
-                email          : 'admin2@gmail.com',
-                firstName      : 'Second',
-                secondName     : 'Default',
-                password       : 'password',
-                status         : 'ACTIVE',
-                agreeWithTerms : true
-            }
-        ];
         const savedAdmins = await Admin.bulkCreate(admins);
 
         return savedAdmins;
+    }
+
+    async setupUsers() {
+        const savedUsers = await User.bulkCreate(users);
+
+        return savedUsers;
     }
 
     async setupActions(userId, adminId) {
@@ -84,6 +38,10 @@ class TestFactory {
         const savedActions = await StoredTriggerableAction.bulkCreate(actions);
 
         return savedActions;
+    }
+
+    async standardSetup() {
+        nodemailerMock.mock.reset();
     }
 }
 

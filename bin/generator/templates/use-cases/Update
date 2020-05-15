@@ -1,0 +1,39 @@
+import { Exception as X } from '{{PACKAGES_RELATIVE_PATH}}';
+
+import Base from '{{USECASE_BASE_RELATIVE_PATH}}';
+import { dump{{MODEL_NAME}} } from '{{DUMPS_RELATIVE_PATH}}';
+import {{MODEL_NAME}} from '{{MODEL_RELATIVE_PATH}}';
+import DMX from '{{DMX_RELATIVE_PATH}}';
+
+export default class {{MODEL_NAME_NAMESPACED}}Update extends Base {
+    static validationRules = {
+        {{LIVR_RULES_ID}}
+        data : [ { 'nested_object' : {
+            {{LIVR_RULES}}
+        } } ]
+    };
+
+    async execute({ id, data }) {
+        try {
+            const {{MODEL_NAME_tolCC}} = await {{MODEL_NAME}}.findById(id);
+            
+            const result = await {{MODEL_NAME_tolCC}}.update(data);
+
+            return { data: dump{{MODEL_NAME}}(result) };
+        } catch (x) {
+            if (x instanceof DMX.WrongId) {
+                throw new X({
+                    code   : 'WRONG_ID',
+                    fields : { [x.field]: 'WRONG_ID' }
+                });
+            }
+            if (x instanceof DMX.NotUnique) {
+                throw new X({
+                    code   : 'NOT_UNIQUE',
+                    fields : { [x.field]: 'NOT_UNIQUE' }
+                });
+            }
+            throw x;
+        }
+    }
+}

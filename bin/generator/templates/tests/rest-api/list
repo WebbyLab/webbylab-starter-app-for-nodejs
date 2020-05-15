@@ -1,0 +1,37 @@
+import { generateToken } from '{{ROOT_RELATIVE_PATH}}/lib/use-cases/utils/jwtUtils.mjs';
+import { getDirName }    from '{{ROOT_RELATIVE_PATH}}/lib/utils/index.mjs';
+import Tester            from '{{TESTER_RELATIVE_PATH}}';
+
+const tester = new Tester();
+
+const dirname = getDirName(import.meta.url);
+
+function requestBuilder(input, token) {
+    let url = '/api/v1/{{NAMESPACED_MODEL_NAME}}/?';
+
+    for (const [ key, value ] of Object.entries(input)) {
+        url += `${key}=${value}&`;
+    }
+
+    return {
+        method  : 'GET',
+        url,
+        headers : {
+            'Authorization' : token
+        }
+    };
+}
+
+tester.setupTestsWithTransactions(`${dirname}/{{FIXTURES_RELATIVE_PATH}}/positive`,
+    '{{NAMESPACED_MODEL_NAME}}-list/positive',
+    async ({ config: { before }, input, expected }) => {
+        const { {{ACTOR_toLC}}Id } = await before(tester.factory);
+        const accessToken = generateToken({ id: {{ACTOR_toLC}}Id });
+
+        await tester.testUseCasePositive({
+            requestBuilder : (...args) => requestBuilder(...args, accessToken),
+            input,
+            expected
+        });
+    }
+);

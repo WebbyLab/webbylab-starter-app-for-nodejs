@@ -1,0 +1,30 @@
+import { Exception as X } from '{{PACKAGES_RELATIVE_PATH}}';
+
+import Base from '{{USECASE_BASE_RELATIVE_PATH}}';
+import { dump{{MODEL_NAME}} } from '{{DUMPS_RELATIVE_PATH}}';
+import {{MODEL_NAME}} from '{{MODEL_RELATIVE_PATH}}';
+import DMX from '{{DMX_RELATIVE_PATH}}';
+
+export default class {{MODEL_NAME_NAMESPACED}}Create extends Base {
+    static validationRules = {
+        data : [ 'required', { 'nested_object' : {
+            {{LIVR_RULES}}
+        } } ]
+    };
+
+    async execute({ data }) {
+        try {
+            const {{MODEL_NAME_tolCC}} = await {{MODEL_NAME}}.create(data);
+
+            return { data: dump{{MODEL_NAME}}({{MODEL_NAME_tolCC}}) };
+        } catch (x) {
+            if (x instanceof DMX.NotUnique) {
+                throw new X({
+                    code   : 'NOT_UNIQUE',
+                    fields : { [x.field]: 'NOT_UNIQUE' }
+                });
+            }
+            throw x;
+        }
+    }
+}

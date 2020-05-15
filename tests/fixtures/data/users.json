@@ -1,0 +1,26 @@
+[
+    {
+        "email"         : "default1@gmail.com",
+        "firstName"     : "First",
+        "secondName"    : "Default",
+        "password"      : "password",
+        "status"        : "PENDING",
+        "agreeWithTerms": true
+    },
+    {
+        "email"         : "default2@gmail.com",
+        "firstName"     : "Second",
+        "secondName"    : "Default",
+        "password"      : "password",
+        "status"        : "ACTIVE",
+        "agreeWithTerms": true
+    },
+    {
+        "email"         : "default3@gmail.com",
+        "firstName"     : "Third",
+        "secondName"    : "Default",
+        "password"      : "password",
+        "status"        : "BLOCKED",
+        "agreeWithTerms": true
+    }
+]

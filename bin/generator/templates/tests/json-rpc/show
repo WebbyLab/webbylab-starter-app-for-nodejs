@@ -1,0 +1,23 @@
+import { getDirName } from '{{ROOT_RELATIVE_PATH}}/lib/utils/index.mjs';
+import Tester         from '{{TESTER_RELATIVE_PATH}}';
+
+const tester = new Tester();
+
+const dirname = getDirName(import.meta.url);
+
+tester.setupTestsWithTransactions(`${dirname}/{{FIXTURES_RELATIVE_PATH}}/positive`,
+    '{{NAMESPACED_MODEL_NAME}}-show/positive',
+    async ({ config: { useCaseClass, before }, expected }) => {
+        const { {{MODEL_NAME_toLC}}Id } = await before(tester.factory);
+
+        await tester.testUseCasePositive({ method: useCaseClass.name, input: { id: {{MODEL_NAME_toLC}}Id },  expected });
+    }
+);
+
+tester.setupTestsWithTransactions(`${dirname}/{{FIXTURES_RELATIVE_PATH}}/negative`,
+    '{{NAMESPACED_MODEL_NAME}}-show/negative',
+    async ({ config: { useCaseClass, before }, input, exception }) => {
+        await before(tester.factory);
+        await tester.testUseCaseNegative({ method: useCaseClass.name, input, exception });
+    }
+);
