@@ -13,9 +13,9 @@
     "test:audit": "npm audit",
     "test": "npm run test:lint && npm run test:audit && npm run test:coverage",
     "create:admin": "node ./bin/add_admin.mjs",
-    "generate": "node --experimental-json-modules ./bin/generator.mjs",
+    "migration:db": "sequelize db:migrate --config lib/config.cjs --env db",
     "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
-    "migration:db": "sequelize db:migrate --config lib/config.cjs --env db"
+    "generate": "node --experimental-json-modules ./bin/generator.mjs"
   },
   "pre-commit": [
     "test:lint"
