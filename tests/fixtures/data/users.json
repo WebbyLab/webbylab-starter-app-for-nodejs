@@ -4,7 +4,7 @@
         "firstName"     : "First",
         "secondName"    : "Default",
         "password"      : "password",
-        "status"        : "PENDING",
+        "status"        : "ACTIVE",
         "agreeWithTerms": true
     },
     {
@@ -12,7 +12,7 @@
         "firstName"     : "Second",
         "secondName"    : "Default",
         "password"      : "password",
-        "status"        : "ACTIVE",
+        "status"        : "PENDING",
         "agreeWithTerms": true
     },
     {

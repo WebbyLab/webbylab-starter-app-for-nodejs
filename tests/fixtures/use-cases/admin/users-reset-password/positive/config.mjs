@@ -8,7 +8,7 @@ export default {
         const admins = await factory.setupAdmins();
 
         const adminId = admins[0].id;
-        const userId = users[1].id;
+        const userId = users[0].id;
 
         return { adminId, userId };
     }

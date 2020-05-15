@@ -7,6 +7,6 @@ export default {
 
         const users = await factory.setupUsers();
 
-        return users[1].id;
+        return users[0].id;
     }
 };
