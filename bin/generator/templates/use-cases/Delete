@@ -1,0 +1,29 @@
+import { Exception as X } from '{{PACKAGES_RELATIVE_PATH}}';
+
+import Base from '{{USECASE_BASE_RELATIVE_PATH}}';
+import {{MODEL_NAME}} from '{{MODEL_RELATIVE_PATH}}';
+import DMX from '{{DMX_RELATIVE_PATH}}';
+
+export default class {{MODEL_NAME_NAMESPACED}}Delete extends Base {
+    static validationRules = {
+        {{LIVR_RULES_ID}}
+    };
+
+    async execute({ id }) {
+        try {
+            const {{MODEL_NAME_tolCC}} = await {{MODEL_NAME}}.findById(id);
+
+            await {{MODEL_NAME_tolCC}}.destroy();
+
+            return { };
+        } catch (x) {
+            if (x instanceof DMX.WrongId) {
+                throw new X({
+                    code   : 'WRONG_ID',
+                    fields : { [x.field]: 'WRONG_ID' }
+                });
+            }
+            throw x;
+        }
+    }
+}

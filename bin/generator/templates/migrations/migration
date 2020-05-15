@@ -1,0 +1,12 @@
+// eslint-disable-next-line import/no-commonjs
+module.exports = {
+    up : (queryInterface, Sequelize) => {
+        return queryInterface.createTable('{{MODEL_NAME_PLURAL}}', {
+            {{SCHEMA}}
+        });
+    },
+
+    down : (queryInterface) => {
+        return queryInterface.dropTable('{{MODEL_NAME_PLURAL}}');
+    }
+};

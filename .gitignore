@@ -3,3 +3,4 @@ npm-debug.log
 coverage/
 logs/*
 .env
+bin/generator/tmp

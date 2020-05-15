@@ -1,0 +1,46 @@
+import { generateToken } from '{{ROOT_RELATIVE_PATH}}/lib/use-cases/utils/jwtUtils.mjs';
+import { getDirName }    from '{{ROOT_RELATIVE_PATH}}/lib/utils/index.mjs';
+import Tester            from '{{TESTER_RELATIVE_PATH}}';
+
+const tester = new Tester();
+
+const dirname = getDirName(import.meta.url);
+
+function requestBuilder(input, token) {
+    return {
+        method  : 'POST',
+        url     : '/api/v1/{{NAMESPACED_MODEL_NAME}}',
+        body    : input,
+        headers : {
+            'Authorization' : token
+        }
+    };
+}
+
+tester.setupTestsWithTransactions(`${dirname}/{{FIXTURES_RELATIVE_PATH}}/positive`,
+    '{{NAMESPACED_MODEL_NAME}}-create/positive',
+    async ({ config: { before }, input, expected }) => {
+        const { {{ACTOR_toLC}}Id } = await before(tester.factory);
+        const accessToken = generateToken({ id: {{ACTOR_toLC}}Id });
+
+        await tester.testUseCasePositive({
+            requestBuilder : (...args) => requestBuilder(...args, accessToken),
+            input,
+            expected
+        });
+    }
+);
+
+tester.setupTestsWithTransactions(`${dirname}/{{FIXTURES_RELATIVE_PATH}}/negative`,
+    '{{NAMESPACED_MODEL_NAME}}-create/negative',
+    async ({ config: { before }, input, exception }) => {
+        const { {{ACTOR_toLC}}Id } = await before(tester.factory);
+        const accessToken = generateToken({ id: {{ACTOR_toLC}}Id });
+
+        await tester.testUseCaseNegative({
+            requestBuilder : (...args) => requestBuilder(...args, accessToken),
+            input,
+            exception
+        });
+    }
+);

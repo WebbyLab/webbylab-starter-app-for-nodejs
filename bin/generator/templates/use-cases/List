@@ -1,0 +1,53 @@
+import { Op } from '{{PACKAGES_RELATIVE_PATH}}';
+
+import Base from '{{USECASE_BASE_RELATIVE_PATH}}';
+import { dump{{MODEL_NAME}} } from '{{DUMPS_RELATIVE_PATH}}';
+import {{MODEL_NAME}} from '{{MODEL_RELATIVE_PATH}}';
+
+export default class {{MODEL_NAME_NAMESPACED}}List extends Base {
+    static validationRules = {
+        search   : [ { 'min_length': 2 } ],
+        limit    : [ 'positive_integer' ],
+        offset   : [ 'integer', { 'min_number': 0 } ],
+        sortedBy : [ { 'one_of': [ 'id', 'createdAt', 'updatedAt' ] } ],
+        order    : [ { 'one_of': [ 'ASC', 'DESC' ] } ]
+    };
+
+    async execute({
+        limit    = 20,
+        offset   = 0,
+        search   = '',
+        sortedBy = 'createdAt',
+        order    = 'DESC'
+    }) {
+        const searchFields = {{SEARCH_FIELDS}};
+        const findQuery = search
+            ? { [Op.or]: searchFields.map(field => ({ [field]: { [Op.like]: `%${ search }%` } })) }
+            : {};
+
+        const dbRequest = {
+            where : findQuery,
+            order : [ [ sortedBy, order ] ],
+            limit,
+            offset
+        };
+
+        const [ {{MODEL_NAME_PLURAL}}, filteredCount, totalCount ] = await Promise.all([
+            {{MODEL_NAME}}.findAll(dbRequest),
+            {{MODEL_NAME}}.count({ where: findQuery }),
+            {{MODEL_NAME}}.count()
+        ]);
+
+        const data = {{MODEL_NAME_PLURAL}}.map(dump{{MODEL_NAME}});
+
+        return {
+            data,
+            meta : {
+                totalCount,
+                filteredCount,
+                limit,
+                offset
+            }
+        };
+    }
+}

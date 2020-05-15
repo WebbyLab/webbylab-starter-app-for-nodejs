@@ -1,0 +1,7 @@
+
+// {{MODEL_NAME_PLURAL}}
+router.post('/{{MODEL_NAME_PLURAL}}',       checkSession, controllers.{{MODEL_NAME_PLURAL}}.create);
+router.get('/{{MODEL_NAME_PLURAL}}/:id',    checkSession, controllers.{{MODEL_NAME_PLURAL}}.show);
+router.get('/{{MODEL_NAME_PLURAL}}',        checkSession, controllers.{{MODEL_NAME_PLURAL}}.list);
+router.put('/{{MODEL_NAME_PLURAL}}/:id',    checkSession, controllers.{{MODEL_NAME_PLURAL}}.update);
+router.delete('/{{MODEL_NAME_PLURAL}}/:id', checkSession, controllers.{{MODEL_NAME_PLURAL}}.delete);
