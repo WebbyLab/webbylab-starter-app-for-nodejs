@@ -24,6 +24,12 @@
 4. Add GraphQL support
 5. Split chistajs into seprate modules for RESTAPI/GraphQL/JSONRPC support
 
+## LINKS
+
+1. [en] The working Architecture of Node.js Applications (JSNation Conference 2019): https://www.youtube.com/watch?v=eVGdV53q68I
+2. [ru] Effective NodeJS Application Development (FWDAYS'20): https://www.youtube.com/watch?v=g0I2dNwK1BE
+3. [ru] 6 Ways to Hack Your JavaScript Application (JS Fest 2019 Spring): https://www.youtube.com/watch?v=tBXZRC1f34E
+
 ## REQUIREMENTS
 * NodeJS v14+
 * Docker v18+
