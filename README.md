@@ -6,18 +6,26 @@
 4. Follows [12 factor app](https://12factor.net/) approach
 5. Modern JS (including ES6 for sequalize)
 6. Supports both REST API and JSON RPC (WS)
-7. Follows security best practices
-8. [Docker](https://docs.docker.com/) support
-9. Covered with tests
-10. Battle tested
-11. Built on top of [express.js](https://expressjs.com/)
-12. User management out of the box **(in progress)**
-13. SMTP support
-14. Works in Linux, Mac, Windows
-15. Generate folders/files from Sequelize Model
+7. Continuation Local Storae enabled by default for transactions and logs tracking 
+8. Follows security best practices
+9. [Docker](https://docs.docker.com/) support
+10. Covered with tests
+11. Battle tested
+12. Built on top of [express.js](https://expressjs.com/)
+13. User management out of the box **(in progress)**
+14. SMTP support (with development and testing mocks)
+15. Works in Linux, Mac, Windows
+16. Automatically generate CRUD from Sequelize Model
+
+## TODO
+1. Authtentication with different strategies (FB etc)
+2. CQRS for reports out of the box
+3. Add more secutiry features to eslint static analysis
+4. Add GraphQL support
+5. Split chistajs into seprate modules for RESTAPI/GraphQL/JSONRPC support
 
 ## REQUIREMENTS
-* NodeJS v13+
+* NodeJS v14+
 * Docker v18+
 * Docker Compose v1.23+
 
