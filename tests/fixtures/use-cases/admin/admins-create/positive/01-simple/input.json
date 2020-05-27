@@ -1,5 +1,6 @@
 {
     "data": {
-        "email": "admin3@mail.com"
+        "email"    : "admin3@mail.com",
+        "password" : "password"
     }
 }
