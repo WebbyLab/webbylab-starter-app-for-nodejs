@@ -15,7 +15,7 @@
 13. User management out of the box **(in progress)**
 14. SMTP support (with development and testing mocks)
 15. Works in Linux, Mac, Windows
-16. Automatically generate CRUD from Sequelize Model
+16. Automatically generate CRUD from Sequelize Model (Read more [here](./bin/generator/README.md))
 
 ## TODO
 1. Authtentication with different strategies (FB etc)
