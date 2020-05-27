@@ -1,4 +1,6 @@
-# WebbyLab's Node.JS starterkit
+# WebbyLab's Node.JS Skeleton
+
+![logo](./docs/images/logo.png)
 
 1. Based on ideas of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [DDD](https://dddcommunity.org/)
 2. Well defined abstractions (controllers, use case layer, domain model etc).
@@ -6,7 +8,7 @@
 4. Follows [12 factor app](https://12factor.net/) approach
 5. Modern JS (including ES6 for sequalize)
 6. Supports both REST API and JSON RPC (WS)
-7. Continuation Local Storae enabled by default for transactions and logs tracking 
+7. Continuation Local Storaпe enabled by default for transactions and logs tracking 
 8. Follows security best practices
 9. [Docker](https://docs.docker.com/) support
 10. Covered with tests
@@ -49,7 +51,7 @@
 
 ## SCRIPTS
 * `nodemon` - runs app with nodemon
-* `noddemon:docker` - runs app in container (docker)
+* `nodemon:docker` - runs app in container (docker)
 * `start` - runs app with node (NODE_ENV=production)
 * `test:lint` - runs eslint for: lib/, tests/, app.mjs
 * `test:ava` - runs tests with [ava](https://github.com/avajs/ava)
@@ -60,4 +62,3 @@
 * `migration:db` - runs sequelize migration with `--env db` parameter
 * `migration:test` - runs sequelize migration with `--env test-db` parameter
 * `generate` - generates folders/files from Sequelize Model
-
