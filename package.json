@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "nodemon": "MODE=application nodemon app.mjs",
-    "nodemon:docker": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "nodemon:docker": "docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up",
     "start": "MODE=application NODE_ENV=production node app.mjs",
     "test:lint": "eslint lib tests app.mjs --ext mjs",
     "test:ava": "ava",

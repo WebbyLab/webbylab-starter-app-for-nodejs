@@ -30,7 +30,7 @@
 * Docker Compose v1.23+
 
 ## RUN DEVELOPMENT VERSION
-1. docker-compose up
+1. docker-compose -f docker/docker-compose.yml up
 2. npm install
 3. npm run migration:db
 4. npm run migration:test
@@ -39,7 +39,7 @@
 
 ## RUN IN CONTAINER (DOCKER) (in progress)
 1. make sure docker and docker-compose are installed 
-2. run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+2. run `docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up`
 
 ## SCRIPTS
 * `nodemon` - runs app with nodemon
