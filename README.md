@@ -17,7 +17,7 @@
 13. User management out of the box **(in progress)**
 14. SMTP support (with development and testing mocks)
 15. Works in Linux, Mac, Windows
-16. Automatically generate CRUD from Sequelize Model (Read more [here](./bin/generator/README.md))
+16. Automatically generate CRUD from Sequelize Model (Read more [here](./docs/CRUD_GENERATOR.md))
 
 ## TODO
 1. Authtentication with different strategies (FB etc)
@@ -46,8 +46,9 @@
 6. npm run nodemon
 
 ## RUN IN CONTAINER (DOCKER) (in progress)
-1. make sure docker and docker-compose are installed 
-2. run `docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up`
+1. make sure docker and docker-compose are installed
+2. create .env file in project root directory (it could be empty)
+3. run `docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up`
 
 ## SCRIPTS
 * `nodemon` - runs app with nodemon
