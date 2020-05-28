@@ -1,6 +1,6 @@
 # WebbyLab's Node.JS Skeleton
 
-![logo](./docs/images/logo.png)
+![logo](./docs/images/logo.jpg)
 
 1. Based on ideas of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [DDD](https://dddcommunity.org/)
 2. Well defined abstractions (controllers, use case layer, domain model etc).
