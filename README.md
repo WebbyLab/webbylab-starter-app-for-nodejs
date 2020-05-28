@@ -52,7 +52,10 @@
 
 ## SCRIPTS
 * `nodemon` - runs app with nodemon
-* `nodemon:docker` - runs app in container (docker)
+* `docker:dev:up` - starts app and infrastructure using docker-compose
+* `docker:dev:down` - stops docker-compose from "docker:dev:up"
+* `docker:up` - starts infrastructure (db, smtp-server, imageproxy, adminer, s3-server) using docker-compose
+* `docker:down` - stops docker-compose from "docker:up"
 * `start` - runs app with node (NODE_ENV=production)
 * `test:lint` - runs eslint for: lib/, tests/, app.mjs
 * `test:ava` - runs tests with [ava](https://github.com/avajs/ava)
