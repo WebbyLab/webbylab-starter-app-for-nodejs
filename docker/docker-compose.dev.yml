@@ -2,12 +2,12 @@ version: '3.3'
 
 services:
     backend:
-        build: ./
+        build: ../
         command: npm start
         ports: ['8000:8000', '8080:12345']
-        env_file: ['.env']
+        env_file: ['../.env']
         depends_on: ['db', 'mailhog']
-        volumes: ['.:/app']
+        volumes: ['../:/app']
         environment:
             MODE: application
             PORT: 8000

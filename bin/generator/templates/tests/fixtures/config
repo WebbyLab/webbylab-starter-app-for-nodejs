@@ -7,7 +7,7 @@ export default {
         const {{ACTOR_PLURAL_toLC}} = await factory.setup{{ACTOR_PLURAL}}();
         const {{MODEL_NAME_PLURAL_toLC}} = await factory.setup{{MODEL_NAME_PLURAL}}();
 
-        const {{ACTOR_toLC}}Id = {{ACTOR_PLURAL_toLC}}[1].id;
+        const {{ACTOR_toLC}}Id = {{ACTOR_PLURAL_toLC}}[0].id;
         const {{MODEL_NAME_toLC}}Id = {{MODEL_NAME_PLURAL_toLC}}[0].id;
 
         return { {{ACTOR_toLC}}Id, {{MODEL_NAME_toLC}}Id };

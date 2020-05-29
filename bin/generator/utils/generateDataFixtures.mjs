@@ -21,7 +21,7 @@ export default (
 
             const fakeBuilder = {
                 // Strings
-                STRING   : ({ length = 255 }) => faker.lorem.word().slice(0, length),
+                STRING   : ({ length = 255 } = {}) => faker.lorem.word().slice(0, length),
                 ENUM     : ({ values = [] } = {}) => values[Math.floor(Math.random() * (values.length + 1))],
                 TEXT     : () => faker.lorem.text(), // TODO: add support for tiny, medium, long TEXT
                 CITEXT   : () => faker.lorem.text(), // PostgreSQL and SQLite only.
@@ -55,6 +55,7 @@ export default (
 
             object[key] = metaRule ? metaRule() : fakeBuilder(field.type.options);
         }
+
         data.push(object);
     }
 
