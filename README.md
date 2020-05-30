@@ -1,23 +1,26 @@
-# WebbyLab's Node.JS Skeleton
+# WebbyLab's Starter App for Node.JS projects 
 
 ![logo](./docs/images/logo.jpg)
 
 1. Based on ideas of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [DDD](https://dddcommunity.org/)
-2. Well defined abstractions (controllers, use case layer, domain model etc).
-3. Works for small and large projects
-4. Follows [12 factor app](https://12factor.net/) approach
-5. Modern JS (including ES6 for sequalize)
-6. Supports both REST API and JSON RPC (WS)
-7. Continuation Local Storaпe enabled by default for transactions and logs tracking 
-8. Follows security best practices
-9. [Docker](https://docs.docker.com/) support
-10. Covered with tests
-11. Battle tested
-12. Built on top of [express.js](https://expressjs.com/)
-13. User management out of the box **(in progress)**
-14. SMTP support (with development and testing mocks)
-15. Works in Linux, Mac, Windows
-16. Automatically generate CRUD from Sequelize Model (Read more [here](./docs/CRUD_GENERATOR.md))
+2. Battle tested
+3. Well defined abstractions (controllers, use case layer, domain model etc).
+4. Works for small and large projects
+5. Follows [12 factor app](https://12factor.net/) approach
+6. EcmaScript Modules and latest JS features without transpiling 
+7. ES6 classes for Sequalize out of the box
+8. Supports both REST API and JSON RPC (WS)
+9. Continuation Local Storage enabled by default for transactions and logs tracking 
+10. Follows security best practices
+11. [Docker](https://docs.docker.com/) support
+12. Covered with tests (db dependent tests, code coverage etc)
+13. Built on top of [express.js](https://expressjs.com/)
+14. User management out of the box **(in progress)**
+15. S3 support out of the box even for local development
+16. SMTP support (with development and testing mocks)
+17. Works in Linux, Mac, Windows
+18. Automatically generate CRUD from Sequelize Model (Read more [here](./docs/CRUD_GENERATOR.md))
+19. Paranoid eslint rules to cover all edge cases that we can with static analysis.
 
 ## TODO
 1. Authtentication with different strategies (FB etc)
