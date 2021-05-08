@@ -36,7 +36,7 @@
     "docopt": "^0.6.2",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "json-pointer": "^0.6.0",
     "jsonwebtoken": "^8.4.0",
     "livr": "^2.3.1",
