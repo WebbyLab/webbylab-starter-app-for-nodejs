@@ -44,7 +44,7 @@
     "mole-rpc": "^1.0.4",
     "mole-rpc-transport-ws": "^0.4.2",
     "mysql2": "^2.1.0",
-    "nodemailer": "^6.4.6",
+    "nodemailer": "^6.4.16",
     "nodemailer-sendmail-transport": "^1.0.2",
     "nodemailer-smtp-transport": "^2.7.4",
     "pino": "^6.3.0",
