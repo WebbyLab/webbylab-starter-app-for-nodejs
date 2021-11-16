@@ -24,7 +24,7 @@
     "test:lint"
   ],
   "dependencies": {
-    "aws-sdk": "^2.685.0",
+    "aws-sdk": "^2.814.0",
     "bluebird": "^3.7.2",
     "body-parser": "^1.18.3",
     "busboy": "^0.3.1",
