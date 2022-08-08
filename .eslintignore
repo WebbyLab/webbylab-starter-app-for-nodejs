@@ -1,1 +1,3 @@
 /bin/templates
+/tests/lib/BaseTester.mjs
+/tests/lib/TestFactory.mjs

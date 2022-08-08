@@ -16,7 +16,11 @@ const fs = FileSystem.promises;
 
 // This function is needed to make linter alive for current file
 // eslint-disable-next-line func-style
-const lazyImport = (path) => import(path);
+const lazyImport = (path) => {
+    if (path.includes('.json')) return import(path, { assert: { type: 'json' } });
+
+    return import(path);
+};
 
 class BaseTester {
     constructor() {

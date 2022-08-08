@@ -14,7 +14,7 @@
 10. Follows security best practices
 11. [Docker](https://docs.docker.com/) support
 12. Covered with tests (db dependent tests, code coverage etc)
-13. Built on top of [express.js](https://expressjs.com/)
+13. Built on top of [fastify.js](https://www.fastify.io)
 14. User management out of the box **(in progress)**
 15. S3 support out of the box even for local development
 16. SMTP support (with development and testing mocks)

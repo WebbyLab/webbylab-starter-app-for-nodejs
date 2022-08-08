@@ -7,7 +7,7 @@ class RestAPITester extends Base {
     constructor(...params) {
         super(...params);
 
-        RestAPI.start({ appPort: 0 });
+        RestAPI.start({ port: 0 });
     }
 
     async testUseCasePositive({ requestBuilder, input = {}, expected = {} } = {}) {
