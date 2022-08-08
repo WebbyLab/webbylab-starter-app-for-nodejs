@@ -6,5 +6,6 @@ export default {
     dumpsFile        : 'lib/use-cases/utils/dumps.mjs',
     testsFolder      : 'tests',
     templatesFolder  : 'bin/generator/templates',
-    migrationsFolder : 'migrations'
+    migrationsFolder : 'migrations',
+    replaceTag       : '{{GENERATE_NEW_DATA_BELOW}}'
 };

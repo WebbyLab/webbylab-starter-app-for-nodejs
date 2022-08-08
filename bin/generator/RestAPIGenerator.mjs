@@ -134,18 +134,23 @@ class RestAPIGenerator extends Base {
     }
 
     #getRoutesTemplate = ({ actions }) => {
-        let template = '\n// {{MODEL_NAME_PLURAL}}\n';
+        let template = `\n// {{MODEL_NAME_PLURAL}}
+        router.register(async (secureRouter) => {
+            secureRouter.addHook('preHandler', checkSession);\n`;
+
         const actionsMap = {
-            'c' : 'router.post(\'/{{MODEL_NAME_PLURAL_toLCC}}\',       checkSession, controllers.{{MODEL_NAME_PLURAL_toLCC}}.create);',
-            'r' : 'router.get(\'/{{MODEL_NAME_PLURAL_toLCC}}/:id\',    checkSession, controllers.{{MODEL_NAME_PLURAL_toLCC}}.show);',
-            'u' : 'router.put(\'/{{MODEL_NAME_PLURAL_toLCC}}/:id\',    checkSession, controllers.{{MODEL_NAME_PLURAL_toLCC}}.update);',
-            'd' : 'router.delete(\'/{{MODEL_NAME_PLURAL_toLCC}}/:id\', checkSession, controllers.{{MODEL_NAME_PLURAL_toLCC}}.delete);',
-            'l' : 'router.get(\'/{{MODEL_NAME_PLURAL_toLCC}}\',        checkSession, controllers.{{MODEL_NAME_PLURAL_toLCC}}.list);'
+            'c' : 'secureRouter.post(\'/\',      controllers.{{MODEL_NAME_PLURAL_toLCC}}.create);',
+            'r' : 'secureRouter.get(\'/:id\',    controllers.{{MODEL_NAME_PLURAL_toLCC}}.show);',
+            'u' : 'secureRouter.put(\'/:id\',    controllers.{{MODEL_NAME_PLURAL_toLCC}}.update);',
+            'd' : 'secureRouter.delete(\'/:id\', controllers.{{MODEL_NAME_PLURAL_toLCC}}.delete);',
+            'l' : 'secureRouter.get(\'/\',       controllers.{{MODEL_NAME_PLURAL_toLCC}}.list);'
         };
 
         for (const action of actions) {
             template += `${actionsMap[action]}\n`;
         }
+
+        template += '}, { prefix: \'/{{MODEL_NAME_PLURAL_toLCC}}\' });';
 
         return template;
     }

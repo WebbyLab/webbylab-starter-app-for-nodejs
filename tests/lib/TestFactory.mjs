@@ -2,10 +2,10 @@ import nodemailerMock          from 'nodemailer-mock';
 import StoredTriggerableAction from '../../lib/domain-model/StoredTriggerableAction.mjs';
 
 import Admin from '../../lib/domain-model/Admin.mjs';
-import admins from '../fixtures/data/admins.json';
+import admins from '../fixtures/data/admins.json' assert {type: 'json'};
 
 import User from '../../lib/domain-model/User.mjs';
-import users from '../fixtures/data/users.json';
+import users from '../fixtures/data/users.json' assert {type: 'json'};
 
 class TestFactory {
     async setupAdmins() {

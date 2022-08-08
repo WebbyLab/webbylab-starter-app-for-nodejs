@@ -51,7 +51,14 @@ class BaseGenerator {
         const absolutePath = path.join(process.cwd(), filePath);
 
         if (mode === 'append') {
-            await fsPromises.appendFile(absolutePath, data);
+            const fileData = await fsPromises.readFile(absolutePath, 'utf8');
+
+            if (!fileData.includes(this.config.replaceTag)) throw new Error(`${absolutePath} file must contain ${this.config.replaceTag} comment for successful execution`);
+
+            await fsPromises.writeFile(
+                absolutePath,
+                fileData.replace(this.config.replaceTag, `${this.config.replaceTag}\n${data}`)
+            );
         } else if (mode === 'write') {
             await fsPromises.writeFile(absolutePath, data);
         }
@@ -102,6 +109,7 @@ class BaseGenerator {
         let result = template;
 
         for (const [ templateKey, fillData ] of Object.entries(data)) {
+            // eslint-disable-next-line security/detect-non-literal-regexp
             const regExp = new RegExp(`{{${  templateKey  }}}`, 'g');
 
             result = result.replace(regExp, fillData);

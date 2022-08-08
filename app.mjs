@@ -20,7 +20,7 @@ async function main() {
     // Init Controllers Layer (API)
     API.setLogger(logger);
 
-    RestAPI.start({ appPort: config.appPort });
+    await RestAPI.start({ port: config.appPort });
     await JsonRPC.start({ wssPort: config.wssPort });
 
     // Init Domain Model Layer
