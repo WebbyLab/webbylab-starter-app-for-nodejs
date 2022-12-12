@@ -34,7 +34,7 @@
     "connect-busboy": "0.0.2",
     "cors": "^2.8.5",
     "docopt": "^0.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fs-extra": "^8.1.0",
     "handlebars": "^4.7.6",
     "json-pointer": "^0.6.0",
