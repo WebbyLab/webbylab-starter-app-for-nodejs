@@ -38,7 +38,7 @@
     "fs-extra": "^8.1.0",
     "handlebars": "^4.7.6",
     "json-pointer": "^0.6.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "livr": "^2.3.1",
     "livr-extra-rules": "^1.1.0",
     "mole-rpc": "^1.0.4",
